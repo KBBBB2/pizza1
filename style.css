@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Fejléc */
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ccffcc;
+}
+
+h1{
+    font-size: 30px;
+}
+
+.header-left .button {
+    background-color: #ff6600;
+    border: none;
+    color: black;
+    padding: 0.5rem 1rem;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 40px;
+}
+
+.cart-button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Üdvözlő szakasz */
+.welcome {
+    background-color: white;
+    text-align: center;
+    padding: 2rem;
+   
+}
+
+.welcome-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 51rem;
+    
+}
+
+
+
+.text-box {
+    margin-right: 60rem;
+    background-color: #ccffcc;
+    padding: 2rem;
+    border-radius: 20px;
+    height: 320px;
+    width: 380px;
+    font-size: 35px;
+    line-height: 1.5;
+}
+
+.order-button {
+
+    background-color: #ff6600;
+    color: black;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    width: 270px;
+    height: 60px;
+    font-size: 20px;
+    line-height: 0.5;
+}
+
+.pizza-img {
+width: 400px;
+height: 500px;
+ margin-right: -150px;
+}
+
+/* Kiemelt pizzák */
+.highlight {
+    background-color: white;
+    
+    text-align: center;
+}
+
+.highlight-title{
+    background-color:#ccffcc;
+    padding: 2rem;
+}
+
+.pizza-list {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem;
+}
+
+.pizza-item {
+    background-color: #ccffcc;
+    padding: 2rem;
+    border-radius: 20px;
+    
+}
+
+.pizza-item img {
+    background-color: #ccffcc;
+    padding: 5px;
+    width: 100%;
+}
+
+.more-pizzas-button {
+    background-color: #ff6600;
+    color: black;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    border-radius: 40px;
+    width: 270px;
+    height: 60px;
+    font-size: 20px;
+    line-height: 0.5;
+}
+
+
+/* Miért rendelj szakasz */
+.why-order {
+    background-color: white;
+    padding: 2rem;
+    text-align: center;
+    font-size: 20px;
+}
+
+.why-order ul {
+    list-style: none;
+    padding: 4rem;
+}
+
+.why-order ul li {
+    margin-bottom: 1rem;
+}
+
+/* Lábléc */
+footer {
+    background-color: #ccffcc;
+    text-align: center;
+    padding: 1rem;
+}
