@@ -20,7 +20,11 @@ header {
     background-color: #ccffcc;
 }
 
-.header-left .button {
+h1 {
+    font-size: 30px;
+}
+
+.header-right .button {
     background-color: #ff7a21;
     border: none;
     color: black;
@@ -33,7 +37,15 @@ header {
 .cart-button {
     background-color: transparent;
     border: none;
-    font-size: 2rem;
+    cursor: pointer;
+}
+
+.cart-button img {
+    vertical-align: middle;
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
 }
 

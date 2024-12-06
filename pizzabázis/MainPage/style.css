@@ -5,24 +5,28 @@
 }
 
 body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
 }
 
 /* Fejléc */
 header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
     background-color: #ccffcc;
 }
 
-h1{
+h1 {
     font-size: 30px;
 }
 
-.header-left .button {
+.header-left img {
+    width: 100px;
+    height: auto; 
+}
+.header-right .button {
     background-color: #ff7a21;
     border: none;
     color: black;
@@ -30,21 +34,31 @@ h1{
     margin-right: 10px;
     cursor: pointer;
     border-radius: 40px;
+    margin-left: 10px;
 }
 
 .cart-button {
     background-color: transparent;
     border: none;
-    font-size: 2rem;
     cursor: pointer;
 }
+
+.cart-button img {
+    vertical-align: middle; 
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 
 /* Üdvözlő szakasz */
 .welcome {
     background-color: white;
     text-align: center;
     padding: 2rem;
-   
+
 }
 
 .welcome-content {
@@ -52,23 +66,23 @@ h1{
     justify-content: center;
     align-items: center;
     height: 39rem;
-    
+
 }
 
 .pizza-img {
     position: absolute;
-    right: 0; 
-    max-width: 50%; 
+    right: 0;
+    max-width: 50%;
     height: auto;
     object-fit: cover;
 }
 
 .text-box {
     margin-right: 50rem;
-    background-color: #ccffcc; 
+    background-color: #ccffcc;
     padding: 2rem;
     border-radius: 40px;
-    width: 420px; 
+    width: 420px;
     font-size: 28px;
     line-height: 1.5;
     text-align: center;
@@ -93,12 +107,12 @@ h1{
 /* Kiemelt pizzák */
 .highlight {
     background-color: white;
-    
+
     text-align: center;
 }
 
-.highlight-title{
-    background-color:#ccffcc;
+.highlight-title {
+    background-color: #ccffcc;
     padding: 2rem;
 }
 
@@ -113,7 +127,7 @@ h1{
     background-color: #ccffcc;
     padding: 2rem;
     border-radius: 20px;
-    
+
 }
 
 .pizza-item img {
@@ -160,4 +174,3 @@ footer {
     text-align: center;
     padding: 1rem;
 }
-
