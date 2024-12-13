@@ -15,12 +15,14 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
+
+        $username = $_POST['username'];
         
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         // Felhasználónév ellenőrzése az account táblában
-        $checkUsernameQuery = "SELECT * FROM account WHERE firstname='$firstname'";
+        $checkUsernameQuery = "SELECT * FROM account WHERE username='$username'";
         $usernameResult = $conn->query($checkUsernameQuery);
 
         // Email ellenőrzése a users táblában
@@ -32,7 +34,7 @@
             echo "A felhasználónév vagy e-mail már foglalt.";
         } else {
             // Új felhasználó hozzáadása
-            $insertQuery = "INSERT INTO account (firstname, lastname, email, password) VALUES ('$firstname', 'lastname', '$email', '$password')";
+            $insertQuery = "INSERT INTO account (firstname, lastname, username, email, password) VALUES ('$firstname', '$lastname', '$username', '$email', '$password')";
             if ($conn->query($insertQuery) === TRUE) {
                 echo "Sikeres regisztráció!";
             } else {
@@ -70,15 +72,18 @@ a titkosítás, miatt (fontos hogy meg kell jegyezni az admin,
 
             <div class="form-group">
                 <input type="text" placeholder="Vezetéknév" name="firstname" required>
-                <input type="text" placeholder="Keresztnév">
+                <input type="text" placeholder="Keresztnév" name="lastname" required>
             </div>
             <div class="form-group">
-                <input type="email" placeholder="e-mail cím" name="email" required>
+                <input type="username" placeholder="Felhasználónév" name="username" required>
                 <input type="tel" placeholder="Telefonszám">
             </div>
             <div class="form-group">
                 <input type="password" placeholder="Jelszó" name="password" required>
-                <input type="password" placeholder="Jelszó újra">
+                <input type="password" placeholder="Jelszó újra" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="e-mail cím" name="email" required> 
             </div>
             <button type="submit" class="create-account-button">Fiók létrehozása</button>
         </form>
