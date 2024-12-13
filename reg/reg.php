@@ -15,6 +15,12 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
+<<<<<<< Updated upstream
+=======
+
+        $phonenumber = $_POST['phonenumber'];
+        $username = $_POST['username'];
+>>>>>>> Stashed changes
         
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -32,7 +38,11 @@
             echo "A felhasználónév vagy e-mail már foglalt.";
         } else {
             // Új felhasználó hozzáadása
+<<<<<<< Updated upstream
             $insertQuery = "INSERT INTO account (firstname, lastname, email, password) VALUES ('$firstname', 'lastname', '$email', '$password')";
+=======
+            $insertQuery = "INSERT INTO account (firstname, lastname, username, phonenumber, email, password) VALUES ('$firstname', '$lastname', '$username', '$phonenumber', '$email', '$password')";
+>>>>>>> Stashed changes
             if ($conn->query($insertQuery) === TRUE) {
                 echo "Sikeres regisztráció!";
             } else {
@@ -73,8 +83,13 @@ a titkosítás, miatt (fontos hogy meg kell jegyezni az admin,
                 <input type="text" placeholder="Keresztnév">
             </div>
             <div class="form-group">
+<<<<<<< Updated upstream
                 <input type="email" placeholder="e-mail cím" name="email" required>
                 <input type="tel" placeholder="Telefonszám">
+=======
+                <input type="username" placeholder="Felhasználónév" name="username" required>
+                <input type="tel" placeholder="Telefonszám" name="phonenumber">
+>>>>>>> Stashed changes
             </div>
             <div class="form-group">
                 <input type="password" placeholder="Jelszó" name="password" required>
