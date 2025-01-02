@@ -2,22 +2,38 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
-    
 }
 
 body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
 }
 
 /* Fejléc */
 header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between; 
     align-items: center;
     padding: 1rem;
     background-color: #ccffcc;
+}
+
+/* Lábléc */
+footer {
+    background-color: #ccffcc;
+    text-align: center;
+    padding: 2rem;
+}
+
+.header-left img {
+    width: 80px;
+    height: auto;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
 }
 
 .header-right .button {
@@ -25,7 +41,6 @@ header {
     border: none;
     color: black;
     padding: 15px 30px;
-    margin-right: 10px;
     cursor: pointer;
     border-radius: 40px;
 }
@@ -35,13 +50,11 @@ header {
     border: none;
     cursor: pointer;
 }
+
 .cart-button img {
     vertical-align: middle; 
     height: 50px;
     width: 50px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
 }
 
 /* Regisztrációs felület */
@@ -100,4 +113,3 @@ header {
     max-width: 50%;
     height: auto;
 }
-
