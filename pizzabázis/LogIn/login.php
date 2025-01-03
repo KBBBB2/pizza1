@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Jelszó ellenőrzése
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $username;
-            header("Location: dashboard.php");
+            header("Location: ../MainPage/index.html");
             exit;
         } else {
             echo "Hibás jelszó. Megadott: " . $password . " | Adatbázis: " . $user['password'];
@@ -27,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -37,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Belépés</title>
     
 </head>
+
 <body>
 
      <!-- Fejléc -->
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Belépési felület -->
 <section class="login-section">
     <div class="login-form">
-        <form>
+        <form method="post" action="login.php">
             <div class="form-group">
                 <input type="username" placeholder="Felhasználónév" name="username">
             </div>
