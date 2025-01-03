@@ -17,11 +17,6 @@ CREATE TABLE `UserRoles` (
   `role` varchar(255) NOT NULL
 );
 
-CREATE TABLE `Role` (
-  `account_id` integer(8) NOT NULL,
-  `role` varchar(255)
-);
-
 CREATE TABLE `Customer_addresses` (
   `customer_user_id` integer(8) NOT NULL,
   `city` varchar(255),
