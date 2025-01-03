@@ -51,7 +51,6 @@ CREATE TABLE `Delivery` (
 CREATE TABLE `Review` (
   `id` integer(8) PRIMARY KEY NOT NULL,
   `created` timestamp,
-  `updated` timestamp,
   `message` varchar(1000),
   `rated` integer(4) NOT NULL,
   `order_id` integer(8) NOT NULL
