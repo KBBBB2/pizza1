@@ -17,6 +17,11 @@ CREATE TABLE `UserRoles` (
   `role` varchar(255) NOT NULL
 );
 
+CREATE TABLE `Role` (
+  `account_id` integer(8) NOT NULL,
+  `role` varchar(255)
+);
+
 CREATE TABLE `Customer_addresses` (
   `customer_user_id` integer(8) NOT NULL,
   `city` varchar(255),
@@ -46,6 +51,7 @@ CREATE TABLE `Delivery` (
 CREATE TABLE `Review` (
   `id` integer(8) PRIMARY KEY NOT NULL,
   `created` timestamp,
+  `updated` timestamp,
   `message` varchar(1000),
   `rated` integer(4) NOT NULL,
   `order_id` integer(8) NOT NULL

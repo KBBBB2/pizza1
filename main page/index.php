@@ -8,11 +8,28 @@
 </head>
 <body>
 
+<?php
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    session_destroy(); // Munkamenet törlése
+    header("Location: " . $_SERVER['PHP_SELF']); // Visszairányítás az aktuális oldalra
+    exit();
+}
+?>
+
     <!-- Fejléc -->
     <header>
         <div class="header-left">
+        <?php if (isset($_SESSION['username'])): ?>
+            Üdv, <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong>!
+            <form method="POST" style="display: inline;">
+                <button type="submit" class="button" name="logout"><b>Kijelentkezés</button>
+            </form>
+        <?php else: ?>
             <button type="submit" class="button" onclick="window.location.href='<?php echo "../pizzabázis/login/login.php"; ?>';"><b>Bejelentkezés</b></button>
             <button type="submit" class="button" onclick="window.location.href='<?php echo "../reg/reg.php"; ?>';"><b>Regisztráció</b></button>
+        <?php endif; ?>
             <button type="submit" class="cart-button">🛒</button>
         </div>
         
