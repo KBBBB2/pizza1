@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     $query = "SELECT * FROM account WHERE username='$username'";
+    //$query = "CALL getAccountLogin";
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
@@ -42,9 +43,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      <!-- Fejléc -->
      <header>
         <div class="header-left">
+            <img src="design images/pizza_logo.png" alt="Pizza Logo">
+        </div>
+        <div class="header-left">
             <button type="submit" class="button"><b>Bejelentkezés</b></button>
             <button type="submit" class="button"><b>Regisztráció</b></button>
-            <button type="submit" class="cart-button">🛒</button>
+            <button type="submit" class="cart-button">
+            <img src="design images/shopping-cart.png" alt="Shopping Cart" width="50" height="50">
+        </button>
         </div>
         
         
@@ -60,11 +66,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <input type="password" placeholder="Jelszó" name="password">
             </div>
+            <div class="forgot-password">
+                <a href="#">Elfelejtettem a jelszót</a>
+            </div>
             <button type="submit" class="login-button">Belépés</button>
         </form>
     </div>
     <div class="pizza-image">
-        <img src="pizza images/pizza-image.png" alt="Pizza">
+        <img src="design images/pizza-image.png" alt="Pizza">
     </div>
 </section>
 

@@ -38,13 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
 
     <!-- Üdvözlő szakasz -->
     <section class="welcome">
-        <h1>Üdvözlünk a PizzaBázis oldalán</h1>
+    <h1>Üdvözlünk a PizzaBázis oldalán</h1>
         <div class="welcome-content">
             <div class="text-box">
                 <p>Nálunk eredeti olasz <br>recept alapján <br>készülnek a pizzák.</p><br>
                 <button type="submit" class="order-button"><b>Rendelj tőlünk most!</b></button>
             </div>
-            <img src="pizza images\pizza-image.png" alt="Pizza" class="pizza-img">
+            <img src="design images\pizza-image.png" alt="Pizza" class="pizza-img">
+        </div>>
         </div>
     </section>
 
@@ -52,6 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     <section class="highlight">
         <h2  class="highlight-title">Kiemelt pizzáink</h2>
         <div class="pizza-list">
+            <div class="pizza-item">
+                <h3>Négy sajtos pizza</h3>
+                <img src="pizza images\cheese-pizza.png" alt="Négy sajtos pizza">
+            </div>
             <div class="pizza-item">
                 <h3>Négy sajtos pizza</h3>
                 <img src="pizza images\cheese-pizza.png" alt="Négy sajtos pizza">
