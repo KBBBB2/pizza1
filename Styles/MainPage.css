@@ -1,0 +1,112 @@
+/* Üdvözlő szakasz */
+.welcome {
+    background-color: white;
+    text-align: center;
+    padding: 2rem;
+
+}
+
+.welcome-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 39rem;
+
+}
+
+.pizza-img {
+    position: absolute;
+    right: 0;
+    max-width: 50%;
+    height: auto;
+    object-fit: cover;
+}
+
+.text-box {
+    margin-right: 50rem;
+    background-color: #ccffcc;
+    padding: 2rem;
+    border-radius: 40px;
+    width: 420px;
+    font-size: 28px;
+    line-height: 1.5;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.order-button {
+
+    background-color: #ff7a21;
+    color: black;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    width: 270px;
+    height: 60px;
+    font-size: 20px;
+    line-height: 0.5;
+}
+
+
+
+/* Kiemelt pizzák */
+.highlight {
+    background-color: white;
+
+    text-align: center;
+}
+
+.highlight-title {
+    background-color: #ccffcc;
+    padding: 2rem;
+}
+
+.pizza-list {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem;
+}
+
+.pizza-item img {
+    background-color: #ccffcc;
+    height: 300px; 
+    object-fit: cover; 
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 400px;
+}
+
+.more-pizzas-button {
+    background-color: #ff7a21;
+    color: black;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    border-radius: 40px;
+    width: 270px;
+    height: 60px;
+    font-size: 20px;
+    line-height: 0.5;
+}
+
+
+/* Miért rendelj szakasz */
+.why-order {
+    background-color: white;
+    padding: 2rem;
+    text-align: center;
+    font-size: 20px;
+}
+
+.why-order ul {
+    list-style: none;
+    padding: 4rem;
+}
+
+.why-order ul li {
+    margin-bottom: 1rem;
+}
