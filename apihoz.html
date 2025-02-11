@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Regisztráció és Belépés</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 30px auto;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        input {
+            display: block;
+            margin: 10px 0;
+            width: 95%;
+            padding: 8px;
+        }
+        button {
+            padding: 10px 15px;
+        }
+        .message {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Regisztráció</h1>
+    <form id="registerForm">
+        <input type="text" id="reg_username" placeholder="Felhasználónév" required>
+        <input type="password" id="reg_password" placeholder="Jelszó" required>
+        <button type="submit">Regisztráció</button>
+    </form>
+    <div id="registerMessage" class="message"></div>
+
+    <h1>Belépés</h1>
+    <form id="loginForm">
+        <input type="text" id="login_username" placeholder="Felhasználónév" required>
+        <input type="password" id="login_password" placeholder="Jelszó" required>
+        <button type="submit">Belépés</button>
+    </form>
+    <div id="loginMessage" class="message"></div>
+
+    <script>
+        // Regisztrációs űrlap kezelése
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var username = document.getElementById('reg_username').value;
+            var password = document.getElementById('reg_password').value;
+            fetch('api.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'register',
+                    username: username,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                var msgDiv = document.getElementById('registerMessage');
+                if (data.success) {
+                    msgDiv.style.color = 'green';
+                    msgDiv.textContent = data.success;
+                } else {
+                    msgDiv.style.color = 'red';
+                    msgDiv.textContent = data.error;
+                }
+            })
+            .catch(error => {
+                console.error('Hiba:', error);
+            });
+        });
+
+        // Belépési űrlap kezelése
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var username = document.getElementById('login_username').value;
+            var password = document.getElementById('login_password').value;
+            fetch('api.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'login',
+                    username: username,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                var msgDiv = document.getElementById('loginMessage');
+                if (data.success) {
+                    msgDiv.style.color = 'green';
+                    msgDiv.textContent = data.success;
+                } else {
+                    msgDiv.style.color = 'red';
+                    msgDiv.textContent = data.error;
+                }
+            })
+            .catch(error => {
+                console.error('Hiba:', error);
+            });
+        });
+    </script>
+</body>
+</html>
