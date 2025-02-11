@@ -65,7 +65,8 @@ CREATE TABLE `Orderitem` (
 );
 
 CREATE TABLE `Pizza` (
-  `id` integer(8) PRIMARY KEY NOT NULL,
+  `id` integer(8) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `name` varchar(100),
   `crust` varchar(50),
   `cutstyle` varchar(50),
   `pizzasize` varchar(50),
@@ -108,3 +109,41 @@ ALTER TABLE `Orderitem` ADD FOREIGN KEY (`pizza_id`) REFERENCES `Pizza` (`id`);
 ALTER TABLE `Customer_coupon` ADD FOREIGN KEY (`customer_user_id`) REFERENCES `UserRoles` (`user_id`);
 
 ALTER TABLE `Coupon` ADD FOREIGN KEY (`id`) REFERENCES `Customer_coupon` (`coupon_id`);
+
+--pizza
+
+-- Margherita pizza
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
+VALUES ('Margherita pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradicsom, mozzarella, bazsalikom');
+
+-- Pepperoni pizza
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
+VALUES ('Pepperoni pizza', 'normál tészta', 'hatrészre', 'nagy', 'paradicsom, mozzarella, pepperoni');
+
+-- Vegetáriánus pizza
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
+VALUES ('Vegetáriánus pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradicsom, mozzarella, kaliforniai paprika, olívabogyó, gomba, hagyma');
+
+-- Négy sajtos pizza
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
+VALUES ('Négy sajtos pizza', 'ropogós tészta', 'hatrészre', 'közepes', 'mozzarella, cheddar, kék sajt, parmezán');
+
+-- Húsimádó pizza
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
+VALUES ('Húsimádó pizza', 'vastag tészta', 'négyrészre', 'nagy', 'paradicsom, mozzarella, sonka, szalámi, kolbász, marhahús');
+
+-- Hawaii pizza
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
+VALUES ('Hawaii pizza', 'vékony tészta', 'hatrészre', 'közepes', 'paradicsom, mozzarella, sonka, ananász');
+
+-- BBQ csirke pizza
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
+VALUES ('BBQ csirke pizza', 'vastag tészta', 'négyrészre', 'nagy', 'BBQ szósz, mozzarella, grillezett csirke, lilahagyma, koriander');
+
+-- Csípős pizza
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
+VALUES ('Csípős pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradicsom, mozzarella, fűszeres szalami, chili paprika');
+
+-- Tenger gyümölcsei pizza
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
+VALUES ('Tenger gyümölcsei pizza', 'ropogós tészta', 'hatrészre', 'nagy', 'paradicsom, mozzarella, garnéla, kagyló, polip, tintahal');
