@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 
-// Csak POST kéréseket engedünk meg.
+// Csak POST kéréseket engedünk meg. 2 endpoint kll póbág
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode([
@@ -62,8 +62,13 @@ if ($action === 'register') {
         ]);
         exit;
     }
-    $username = trim($input['username']);
+    $username = $input['username']; //trim-et kiszedtem
     $password = $input['password'];
+    $firstname = $input['firstname'];
+    $lastname = $input['lastname'];
+    $email = $input['email'];
+    $phonenumber = $input['phonenumber'];
+
 
     // Ellenőrizzük, hogy már létezik-e ilyen felhasználó.
     $stmt = $pdo->prepare("SELECT id FROM account WHERE username = ?");
@@ -81,8 +86,8 @@ if ($action === 'register') {
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     
     // Új felhasználó beszúrása az adatbázisba
-    $stmt = $pdo->prepare("INSERT INTO account (username, password) VALUES (?, ?)");
-    if ($stmt->execute([$username, $passwordHash])) {
+    $stmt = $pdo->prepare("INSERT INTO account (username, password, firstname, lastname, email, phonenumber) VALUES (?, ?, ?, ?, ?, ?)");
+    if ($stmt->execute([$username, $passwordHash, $firstname, $lastname, $email, $phonenumber])) {
         echo json_encode(["success" => "Sikeres regisztráció."]);
     } else {
         http_response_code(500);
