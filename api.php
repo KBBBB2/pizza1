@@ -81,12 +81,24 @@ if ($action === 'register') {
         ]);
         exit;
     }
+
+    // Ellenőrizzük, hogy már létezik-e ilyen felhasználó.
+    $stmt = $pdo->prepare("SELECT id FROM account WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetch()) {
+        http_response_code(400);
+        echo json_encode([
+            "error" => "A megadott email cím már foglalt.",
+            "status" => 400
+        ]);
+        exit;
+    }
     
 
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     
     // Új felhasználó beszúrása az adatbázisba
-    $stmt = $pdo->prepare("INSERT INTO account (username, password, firstname, lastname, email, phonenumber) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("CALL 	registAndCheck(?, ?, ?, ?, ?, ?");
     if ($stmt->execute([$username, $passwordHash, $firstname, $lastname, $email, $phonenumber])) {
         echo json_encode(["success" => "Sikeres regisztráció."]);
     } else {
@@ -110,7 +122,7 @@ if ($action === 'register') {
     $password = $input['password'];
 
     // Felhasználó lekérése az adatbázisból
-    $stmt = $pdo->prepare("SELECT id, password FROM account WHERE username = ?");
+    $stmt = $pdo->prepare("CALL getAccountLogin(?)");
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$user) {
@@ -146,3 +158,4 @@ if ($action === 'register') {
     ]);
 }
 ?>
+
