@@ -82,7 +82,7 @@ if ($action === 'register') {
         exit;
     }
 
-    // Ellenőrizzük, hogy már létezik-e ilyen felhasználó.
+    // Ellenőrizzük, hogy már létezik-e ilyen email cím.
     $stmt = $pdo->prepare("SELECT id FROM account WHERE email = ?");
     $stmt->execute([$email]);
     if ($stmt->fetch()) {
@@ -98,7 +98,7 @@ if ($action === 'register') {
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     
     // Új felhasználó beszúrása az adatbázisba
-    $stmt = $pdo->prepare("CALL 	registAndCheck(?, ?, ?, ?, ?, ?");
+    $stmt = $pdo->prepare("CALL registAndCheck(?, ?, ?, ?, ?, ?, @p_result)");
     if ($stmt->execute([$username, $passwordHash, $firstname, $lastname, $email, $phonenumber])) {
         echo json_encode(["success" => "Sikeres regisztráció."]);
     } else {
