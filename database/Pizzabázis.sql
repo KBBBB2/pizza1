@@ -70,7 +70,8 @@ CREATE TABLE `Pizza` (
   `crust` varchar(50),
   `cutstyle` varchar(50),
   `pizzasize` varchar(50),
-  `ingredient` varchar(1000)
+  `ingredient` varchar(1000),
+  `price` varchar(7)
 );
 
 CREATE TABLE `Coupon` (
@@ -113,37 +114,37 @@ ALTER TABLE `Coupon` ADD FOREIGN KEY (`id`) REFERENCES `Customer_coupon` (`coupo
 --pizza
 
 -- Margherita pizza
-INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
-VALUES ('Margherita pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradicsom, mozzarella, bazsalikom');
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
+VALUES ('Margherita pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradicsom, mozzarella, bazsalikom', '2500');
 
 -- Pepperoni pizza
-INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
-VALUES ('Pepperoni pizza', 'normál tészta', 'hatrészre', 'nagy', 'paradicsom, mozzarella, pepperoni');
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
+VALUES ('Pepperoni pizza', 'normál tészta', 'hatrészre', 'nagy', 'paradicsom, mozzarella, pepperoni', '3000');
 
 -- Vegetáriánus pizza
-INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
-VALUES ('Vegetáriánus pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradicsom, mozzarella, kaliforniai paprika, olívabogyó, gomba, hagyma');
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
+VALUES ('Vegetáriánus pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradicsom, mozzarella, kaliforniai paprika, olívabogyó, gomba, hagyma', '2900');
 
 -- Négy sajtos pizza
-INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
-VALUES ('Négy sajtos pizza', 'ropogós tészta', 'hatrészre', 'közepes', 'mozzarella, cheddar, kék sajt, parmezán');
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
+VALUES ('Négy sajtos pizza', 'ropogós tészta', 'hatrészre', 'közepes', 'mozzarella, cheddar, kék sajt, parmezán', '2700');
 
 -- Húsimádó pizza
-INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
-VALUES ('Húsimádó pizza', 'vastag tészta', 'négyrészre', 'nagy', 'paradicsom, mozzarella, sonka, szalámi, kolbász, marhahús');
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
+VALUES ('Húsimádó pizza', 'vastag tészta', 'négyrészre', 'nagy', 'paradicsom, mozzarella, sonka, szalámi, kolbász, marhahús', '3200');
 
 -- Hawaii pizza
-INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
-VALUES ('Hawaii pizza', 'vékony tészta', 'hatrészre', 'közepes', 'paradicsom, mozzarella, sonka, ananász');
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
+VALUES ('Hawaii pizza', 'vékony tészta', 'hatrészre', 'közepes', 'paradicsom, mozzarella, sonka, ananász', '3100');
 
 -- BBQ csirke pizza
-INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
-VALUES ('BBQ csirke pizza', 'vastag tészta', 'négyrészre', 'nagy', 'BBQ szósz, mozzarella, grillezett csirke, lilahagyma, koriander');
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
+VALUES ('BBQ csirke pizza', 'vastag tészta', 'négyrészre', 'nagy', 'BBQ szósz, mozzarella, grillezett csirke, lilahagyma, koriander', '3500');
 
 -- Csípős pizza
-INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
-VALUES ('Csípős pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradicsom, mozzarella, fűszeres szalami, chili paprika');
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
+VALUES ('Csípős pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradicsom, mozzarella, fűszeres szalami, chili paprika', '2800');
 
 -- Tenger gyümölcsei pizza
-INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient)
-VALUES ('Tenger gyümölcsei pizza', 'ropogós tészta', 'hatrészre', 'nagy', 'paradicsom, mozzarella, garnéla, kagyló, polip, tintahal');
+INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
+VALUES ('Tenger gyümölcsei pizza', 'ropogós tészta', 'hatrészre', 'nagy', 'paradicsom, mozzarella, garnéla, kagyló, polip, tintahal', '3700');
