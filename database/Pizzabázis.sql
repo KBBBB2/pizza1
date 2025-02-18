@@ -5,7 +5,7 @@ CREATE TABLE `Account` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `locked` boolean NOT NULL,
-  `enabled` boolean NOT NULL,
+  `disabled` boolean NOT NULL,
   `email` varchar(255),
   `phonenumber` varchar(255),
   `created` timestamp
@@ -148,3 +148,7 @@ VALUES ('Csípős pizza', 'vékony tészta', 'négyrészre', 'közepes', 'paradi
 -- Tenger gyümölcsei pizza
 INSERT INTO pizza (name, crust, cutstyle, pizzasize, ingredient, price)
 VALUES ('Tenger gyümölcsei pizza', 'ropogós tészta', 'hatrészre', 'nagy', 'paradicsom, mozzarella, garnéla, kagyló, polip, tintahal', '3700');
+
+-- Userroles
+INSERT INTO userroles ()
+

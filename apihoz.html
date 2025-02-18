@@ -34,6 +34,10 @@
     <form id="registerForm">
         <input type="text" id="reg_username" placeholder="Felhasználónév" required>
         <input type="password" id="reg_password" placeholder="Jelszó" required>
+        <input type="text" id="firstname" placeholder="firstname" required>
+        <input type="text" id="lastname" placeholder="lastname" required>
+        <input type="text" id="email" placeholder="email" required>
+        <input type="text" id="phonenumber" placeholder="phonenumber" required>
         <button type="submit">Regisztráció</button>
     </form>
     <div id="registerMessage" class="message"></div>
@@ -52,6 +56,10 @@
             e.preventDefault();
             var username = document.getElementById('reg_username').value;
             var password = document.getElementById('reg_password').value;
+            var firstname = document.getElementById('firstname').value;
+            var lastname = document.getElementById('lastname').value;
+            var email = document.getElementById('email').value;
+            var phonenumber = document.getElementById('phonenumber').value;
             fetch('api.php', {
                 method: 'POST',
                 headers: {
@@ -60,7 +68,11 @@
                 body: JSON.stringify({
                     action: 'register',
                     username: username,
-                    password: password
+                    password: password,
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    phonenumber: phonenumber
                 })
             })
             .then(response => response.json())
@@ -113,3 +125,23 @@
     </script>
 </body>
 </html>
+
+<!--BEGIN
+    DECLARE user_count INT;
+    DECLARE user_email INT;
+
+    -- Ellenőrizzük, hogy van-e már ilyen felhasználónév
+    SELECT COUNT(*) INTO user_count FROM account WHERE username = p_username;
+    SELECT COUNT(*) INTO user_email FROM account WHERE email = p_email;
+    
+    IF user_count > 0 THEN
+        SET p_result = 0;  -- Már létezik
+    ELSEIF user_email > 0 THEN
+    	SET p_result = 0;
+    ELSE
+        INSERT INTO account(username, password, firstname, lastname, email, phonenumber)
+        VALUES (p_username, p_password, p_firstname, p_lastname, p_email, p_phonenumber);
+        SET p_result = 1;  -- Sikeres regisztráció
+    END IF;
+END
+-->

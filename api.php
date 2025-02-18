@@ -134,6 +134,24 @@ if ($action === 'register') {
         exit;
     }
     
+    // Ellenőrizzük, hogy a fiók nincs-e letiltva
+    if (isset($user['disabled']) && $user['disabled'] == 1) {
+        http_response_code(403);
+        echo json_encode([
+            "error" => "A fiók véglegesen le van tiltva.",
+            "status" => 403
+        ]);
+        exit;
+    }
+    if (isset($user['locked']) && $user['locked'] == 1) {
+        http_response_code(403);
+        echo json_encode([
+            "error" => "A fiók ideiglenesen le van tiltva.",
+            "status" => 403
+        ]);
+        exit;
+    }
+    
     // Ellenőrizzük a jelszót
     if (password_verify($password, $user['password'])) {
         session_start();
@@ -150,12 +168,7 @@ if ($action === 'register') {
             "status" => 400
         ]);
     }
-} else {
-    http_response_code(400);
-    echo json_encode([
-        "error" => "Érvénytelen action paraméter.",
-        "status" => 400
-    ]);
 }
+
 ?>
 
