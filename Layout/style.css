@@ -4,7 +4,10 @@
     box-sizing: border-box;
 }
 
-body {
+body, html {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
@@ -14,9 +17,8 @@ header {
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    padding: 1rem;
+    width: 100%;
     background-color: #ccffcc;
-    flex-wrap: wrap;
 }
 
 .header-left img {
@@ -28,7 +30,6 @@ header {
     display: flex;
     align-items: center;
     gap: 1rem; 
-    flex-wrap: wrap;
 }
 
 .header-right .button {
@@ -39,6 +40,12 @@ header {
     cursor: pointer;
     border-radius: 40px;
     font-size: 1rem;
+    transition: background-color 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.header-right .button:hover {
+    background-color: #e66a1c;
 }
 
 .cart-button {
@@ -53,7 +60,7 @@ header {
     height: 50px;
 }
 
-.pizza-image{
+.pizza-image {
     width: 410px;
     height: auto;
 }
@@ -62,14 +69,19 @@ header {
 footer {
     background-color: #ccffcc;
     text-align: center;
-    padding: 2.2rem;
+    padding: 1rem;
+    margin-top: auto;
 }
 
-/* Reszponzív stílusok */
-@media (max-width: 768px) {
+/* Reszponzív beállítások */
+@media (max-width: 900px) {
     .header-right {
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.5rem;
+    }
+
+    .pizza-image {
+        display: none;
     }
 
     .header-right .button {
@@ -97,4 +109,3 @@ footer {
         height: 40px;
     }
 }
-

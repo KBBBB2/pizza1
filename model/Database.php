@@ -1,19 +1,32 @@
 <?php
-class Database {
-    private static $host = "localhost";
-    private static $dbname = "pizzabazis";
-    private static $username = "root";  // Cseréld ki, ha kell
-    private static $password = "";      // Cseréld ki, ha kell
-    private static $conn = null;
+// models/Database.php
 
-    public static function connect() {
-        if (self::$conn === null) {
-            self::$conn = new mysqli(self::$host, self::$username, self::$password, self::$dbname);
-            if (self::$conn->connect_error) {
-                die("Adatbázis hiba: " . self::$conn->connect_error);
-            }
+class Database {
+    private static $instance = null;
+    private $pdo;
+
+    private function __construct() {
+        $host = 'localhost';
+        $dbname = 'pizzabazis';
+        $username = 'root';
+        $password = '';
+        try {
+            $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch(PDOException $e) {
+            throw new Exception("Adatbázis kapcsolódási hiba: " . $e->getMessage());
         }
-        return self::$conn;
+    }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
+        return self::$instance;
+    }
+
+    public function getConnection() {
+        return $this->pdo;
     }
 }
 ?>
