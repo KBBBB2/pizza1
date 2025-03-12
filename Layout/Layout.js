@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Ha admin a felhasználó, beszúrjuk az Admin linket
                 if (userRole === 'admin') {
                     var adminLink = document.createElement('a');
-                    adminLink.href = "/merged/view/admin/menu.html";
+                    adminLink.href = "/merged/view/admin/menu.php";
                     adminLink.className = "button";
                     adminLink.style.textDecoration = "none";
                     adminLink.innerHTML = "<b>Admin</b>";

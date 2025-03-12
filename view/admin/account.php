@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: /merged/view/customer/login.html");
+    header("Location: /merged/view/customer/mainpage.html");
     exit();
 }
 ?>
@@ -30,8 +30,8 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 <body>
   <h1>Felhasználók kezelése</h1>
   <a href="account.php">account</a><br>
-  <a href="coupon.html">coupon</a><br>
-  <a href="menu.html">menü</a><br>
+  <a href="coupon.php">coupon</a><br>
+  <a href="menu.php">menü</a><br>
   <br>
   <a href="/merged/view/customer/mainpage.html">Customer nézet</a><br>
   <br>
