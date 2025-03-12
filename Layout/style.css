@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Fejléc */
+header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+    background-color: #ccffcc;
+}
+
+.header-left img {
+    width: 80px;
+    height: auto;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+}
+
+.header-right .button {
+    background-color: #ff7a21;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 40px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.header-right .button:hover {
+    background-color: #e66a1c;
+}
+
+.cart-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-button img,
+.userSettings-button img {
+    width: 50px;
+    height: 50px;
+}
+
+.pizza-image {
+    width: 410px;
+    height: auto;
+}
+
+/* Lábléc */
+footer {
+    background-color: #ccffcc;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+/* Reszponzív beállítások */
+@media (max-width: 900px) {
+    .header-right {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .pizza-image {
+        display: none;
+    }
+
+    .header-right .button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-left img {
+        width: 60px;
+    }
+
+    .header-right {
+        gap: 0.5rem;
+    }
+
+    .header-right .button {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+
+    .cart-button img {
+        width: 40px;
+        height: 40px;
+    }
+}
