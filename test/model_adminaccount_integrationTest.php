@@ -1,10 +1,10 @@
 <?php
-//  ./vendor/bin/phpunit test/model_adminaccount_integrationTest.php
+use PHPUnit\Framework\TestCase;
 
 require_once 'model/Database.php';
 require_once 'model/AdminAccount.php';
 
-class model_adminaccount_integrationTest extends PHPUnit\Framework\TestCase {
+class model_adminaccount_integrationTest extends TestCase {
     private static $adminAccount;
     private static $pdo;
     private $testAccountId;

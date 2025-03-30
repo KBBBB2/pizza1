@@ -2,34 +2,15 @@
 session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: /merged/view/customer/mainpage.html");
-    exit();
+    exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/merged/assets/css/adminStyles/menu.css">
   <title>Pizza Adatbázis</title>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    table, th, td {
-      border: 1px solid #ddd;
-    }
-    th, td {
-      padding: 8px;
-    }
-    .edit-input {
-      width: 90%;
-    }
-    #add-new {
-      margin-bottom: 10px;
-    }
-
-    
-  </style>
 </head>
 <body>
   <h1>Pizza Adatbázis</h1>

@@ -6,31 +6,34 @@
     flex-grow: 1;
 }
 
+/* Üdvözlő szakasz módosítása */
 .welcome-content {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 39rem;
-}
-
-.pizza-img {
-    position: absolute;
-    right: 0;
-    max-width: 50%;
-    height: auto;
-    object-fit: cover;
+    background-color: white;
+    padding: 6rem;
+    height: 47.5rem;
+    flex-grow: 1;
 }
 
 .text-box {
-    margin-right: 50rem;
     background-color: #ccffcc;
     padding: 2rem;
-    border-radius: 40px;
-    width: 420px;
+    border-radius: 20px;
+    width: 40%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: 28px;
     line-height: 1.5;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pizza-image {
+    max-width: 45%;
+    width: 550px !important;
+    height: auto !important;
+    right: -128px !important;
+    position: relative;
 }
 
 .order-button {
@@ -140,10 +143,6 @@
     cursor: pointer;
 }
 
-.original {
-    color: gray;
-}
-
 .summary {
     margin: 10px;
 }
@@ -151,6 +150,7 @@
 li {
     list-style-type: none;
 }
+  
 /* Reszponzív beállítások */
 @media (max-width: 1200px) {
     .welcome-content {
@@ -187,4 +187,10 @@ li {
     .why-order {
         font-size: 18px;
     }
+
+    /* Elrejtjük a pizza képet kis képernyőn */
+    .pizza-image {
+        display: none !;
+    }
 }
+

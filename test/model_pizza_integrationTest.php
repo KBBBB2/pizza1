@@ -1,6 +1,6 @@
 <?php
-//  ./vendor/bin/phpunit test/model_pizza_integrationTest.php
 
+// Betöltjük a szükséges osztályokat
 require_once 'model/Database.php';
 require_once 'model/Pizza.php';
 

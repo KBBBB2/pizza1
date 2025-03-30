@@ -1,74 +1,48 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Az endpoint elérési útja – ellenőrizd, hogy helyes legyen!
-    const apiUrl = "/merged/controller/feateruredPizza.php";
+function loadFeaturedPizzas() {
+    fetch('/merged/Controller/menu.php')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                document.getElementById('featured-pizzas').innerText = "Hiba: " + data.error;
+                return;
+            }
 
-    fetch(apiUrl)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error("HTTP error: " + response.status);
-          }
-          return response.json();
-      })
-      .then(data => {
-          renderFeaturedPizzas(data);
-      })
-      .catch(error => {
-          console.error("Hiba az adatok lekérésekor:", error);
-      });
-});
+            let pizzas = data.data.slice(0, 3);
+            let html = '';
+            pizzas.forEach(pizza => {
+                let imagePath = `/merged/assets/images/${pizza.id}/pizza_${pizza.id}.jpg`;
 
-function renderFeaturedPizzas(pizzas) {
-    const container = document.getElementById("featured-pizzas");
-    if (!container) return;
+                let priceHtml = pizza.discounted_price != null
+                    ? `<p class="card-text"><span class="strikethrough-price">${pizza.price} Ft</span> <br> ${pizza.discounted_price} Ft</p>`
+                    : `<p class="card-text">${pizza.price} Ft</p>`;
 
-    let html = "";
-    pizzas.forEach(pizza => {
-        // Biztosítjuk, hogy a kép URL ne legyen undefined
-        const imageUrl = `/merged/assets/images/${pizza.pizza_id}/pizza_${pizza.pizza_id}.jpg`;
+                html += `<div class="col-md-4">
+                            <div class="card border-0 rounded-lg shadow-sm">
+                                <img src="${imagePath}" class="card-img-top" alt="${pizza.name}">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">${pizza.name}</h5>
+                                    ${priceHtml}
+                                    <details>
+                                        <summary>Összetevők</summary>
+                                        <ul>
+                                            <li><b>Tészta:</b> ${pizza.crust}</li>
+                                            <li><b>Szeletelés:</b> ${pizza.cutstyle}</li>
+                                            <li><b>Méret:</b> ${pizza.pizzasize}</li>
+                                            <li><b>Hozzávalók:</b> ${pizza.ingredient}</li>
+                                        </ul>
+                                    </details>
 
-        html += `
-            <div class="col-md-4 col-sm-6">
-                <div class="card">
-                    <img src="${imageUrl}" class="card-img-top" alt="${pizza.name}">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">${pizza.name}</h5>
-                        <s class="card-text original">${pizza.price} Ft</s>
-                        <p class="card-text">${pizza.discounted_price} Ft</p>
-                        <details>
-                            
-                            <summary class="summary">Összetevők</summary>
-                            <ul>
-                                <li><b>Tészta: </b>${pizza.crust}<br></li>
-                                <li><b>Szeletelés: </b>${pizza.cutstyle}<br></li>
-                                <li><b>Méret: </b>${pizza.pizzasize}<br></li>
-                                <li><b>Hozzávalók: </b>${pizza.ingredient}<br></li>
-                            </ul>
-                        </details>
-                        Mennyiség: <input type="number" id="qty-${pizza.id}" value="1" min="1"><br>
-                        <img src="/merged/layout/design images/shopping-cart.png" class="cart-img"onclick='addToCart(${JSON.stringify(pizza)})'>
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-    container.innerHTML = html;
+                                    <!-- Kosár gomb és mennyiségmező középen -->
+                                    <div class="d-flex justify-content-center align-items-center mt-3">
+                                        <input type="number" id="qty-${pizza.id}" value="1" min="1" class="form-control" style="background-color: #fff3d7; width: 60px; text-align: center;">
+                                        <img src="/merged/layout/design images/shopping-cart.png" class="cart-img ms-3" onclick='addToCart(${JSON.stringify(pizza)})' style="cursor: pointer; width: 50px; height: 50px;">
+                                    </div>
+                                </div>
+                            </div>
+                          </div>`;
+            });
+            document.getElementById('featured-pizzas').innerHTML = html;
+        });
 }
-  // A pizza kosárba helyezése a megadott mennyiséggel
-  function addToCart(pizza) {
-    let qty = 1;
 
-    // A kosár tartalmát a localStorage-ban tároljuk, alapértelmezetten üres tömb
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Ha a pizza már szerepel a kosárban, növeljük a mennyiséget
-    let existingItem = cart.find(item => item.id === pizza.id);
-    if (existingItem) {
-      existingItem.quantity += qty;
-    } else {
-      // Új elem esetén hozzárendeljük a quantity tulajdonságot
-      pizza.quantity = qty;
-      cart.push(pizza);
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert("Pizza kosárba helyezve!");
-  }
+document.addEventListener("DOMContentLoaded", loadFeaturedPizzas);

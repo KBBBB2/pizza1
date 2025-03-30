@@ -84,12 +84,14 @@ class AccountController {
             $username = trim($input['username']);
             $password = $input['password'];
             $result = $this->account->login($username, $password);
+            // Példa a login ág módosítására a Controller-ben
             if (isset($result['success'])) {
                 if (session_status() === PHP_SESSION_NONE) {
                     session_start();
                 }
                 $_SESSION['user_id'] = $result['user']['id'];
                 $_SESSION['username'] = $username;
+                $_SESSION['role'] = $result['user']['role'];
                 echo json_encode([
                     "success" => $result['success'],
                     "status" => $result['status']

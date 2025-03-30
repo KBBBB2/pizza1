@@ -48,6 +48,10 @@
     width: 100%;
 }
 
+.login-button:hover {
+    background-color: #e66a1c;
+}
+
 /* Reszponzív beállítások */
 @media (max-width: 900px) {
     .login-section {

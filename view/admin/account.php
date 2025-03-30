@@ -2,30 +2,18 @@
 session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: /merged/view/customer/mainpage.html");
-    exit();
+    exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/merged/assets/css/adminStyles/account.css">
   <title>Felhasználók kezelése</title>
   <!-- jQuery betöltése egyszerű AJAX hívásokhoz -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <style>
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 8px;
-    }
-    .action-container {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-  </style>
+
 </head>
 <body>
   <h1>Felhasználók kezelése</h1>

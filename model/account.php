@@ -55,7 +55,7 @@ class Account {
             if ($roleData) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $username;
-                $_SESSION['role'] = $roleData['role']; // Itt mentjük a szerepet
+                $_SESSION['role'] = $roleData['role'];
                 echo json_encode([
                     "success" => "Sikeres belépés.",
                     "status" => 200,

@@ -2,35 +2,20 @@
 session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: /merged/view/customer/mainpage.html");
-    exit();
+    exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/merged/assets/css/adminStyles/coupon.css">
   <title>Coupon Kezelő</title>
-  <style>
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 5px;
-    }
-    #couponFormContainer {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 20px;
-      width: 300px;
-    }
-    /* Egyszerű stílus a kereső részhez */
-    #couponSearchContainer {
-      margin-bottom: 10px;
-    }
-  </style>
+
 </head>
 <body>
   <h1>Coupon lista</h1>
-  <a href="account.html">account</a><br>
+  <a href="account.php">account</a><br>
   <a href="coupon.php">coupon</a><br>
   <a href="menu.php">menü</a><br>
   <br>
@@ -43,7 +28,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     <button id="couponSearchBtn">Keresés</button>
   </div>
   
-  <button id="addCouponBtn">Új Coupon hozzáadása</button>
+  <button id="addCouponBtn" style="margin-bottom: 20px; margin-top: 10px;">Új Coupon hozzáadása</button>
   
   <table id="couponTable">
     <thead>

@@ -97,6 +97,9 @@
     background-color: #e66a1c;
 }
 
+.remove-button:hover {
+    background-color: #e66a1c;
+}
 
 .cart-summary .total {
     font-size: 1.2rem;
