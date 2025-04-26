@@ -20,7 +20,7 @@ class controllerForgot_passwordTest extends TestCase
         $parts = explode('.', $token);
         $this->assertCount(2, $parts);
         $decoded = json_decode(base64_decode($parts[0]), true);
-        $this->assertEquals($userId, $decoded['user_id']);
+        $this->assertEquals($userId, $decoded['userId']);
         $this->assertEquals($expires, $decoded['expires']);
     }
 

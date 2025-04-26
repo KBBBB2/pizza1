@@ -1,5 +1,5 @@
 <?php
-// fájl: test/controller/controllerReset_passwordTest.php
+// vendor/bin/phpunit test/controller/controllerReset_passwordTest.php
 
 declare(strict_types=1);
 

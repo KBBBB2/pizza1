@@ -1,6 +1,4 @@
 <?php
-if (defined('PHPUNIT_RUNNING')) return;
-
 use PHPMailer\PHPMailer\PHPMailer;
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -11,6 +9,10 @@ function generateToken($userId, $expires, $secret) {
     $payload = base64_encode(json_encode($data));
     $sig = hash_hmac('sha256', $payload, $secret);
     return "$payload.$sig";
+}
+
+if (defined('PHPUNIT_RUNNING')) {
+    return;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
