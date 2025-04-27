@@ -1,54 +1,42 @@
 <?php
-// controllers/AdminAccountController.php
+require_once __DIR__ . '/../model/AdminAccount.php';
 
-require_once '../model/adminAccount.php';
+class AdminAccountController {
+    private $model;
 
-header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+    public function __construct($model = null) {
+        $this->model = $model ?? new AdminAccount();
+    }
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    exit(0);
-}
+    public function processRequest(array $input, string $method): array {
+        // Ha OPTIONS, jelezd vissza, hogy kiléphetsz
+        if ($method === 'OPTIONS') {
+            return []; // vagy ['status'=>204]
+        }
 
-// Ha a bejövő tartalom JSON, akkor dekódoljuk
-if (isset($_SERVER["CONTENT_TYPE"]) && strpos($_SERVER["CONTENT_TYPE"], "application/json") !== false) {
-    $rawData = file_get_contents("php://input");
-    $jsonData = json_decode($rawData, true);
-    if (is_array($jsonData)) {
-        $_REQUEST = array_merge($_REQUEST, $jsonData);
+        $action = $input['action'] ?? '';
+
+        switch ($action) {
+            case 'getAccounts':
+                $q = $input['q'] ?? '';
+                return $this->model->getAccounts($q);
+
+            case 'tempBan':
+                $id       = intval($input['id'] ?? 0);
+                $duration = $input['duration'] ?? '';
+                $expires  = $this->model->tempBan($id, $duration);
+                return [
+                    'message'        => 'Felhasználó ideiglenesen letiltva.',
+                    'ban_expires_at' => $expires
+                ];
+
+            case 'permBan':
+                $id = intval($input['id'] ?? 0);
+                $this->model->permBan($id);
+                return ['message'=>'Felhasználó véglegesen letiltva.'];
+
+            default:
+                return ['error'=>'Érvénytelen művelet.'];
+        }
     }
 }
-
-$action = $_REQUEST['action'] ?? '';
-
-$adminAccount = new AdminAccount();
-
-try {
-    if ($action == 'getAccounts') {
-        $q = $_REQUEST['q'] ?? '';
-        $accounts = $adminAccount->getAccounts($q);
-        echo json_encode($accounts);
-
-    } elseif ($action == 'tempBan') {
-        $id = intval($_REQUEST['id'] ?? 0);
-        $duration = $_REQUEST['duration'] ?? '';
-        $banExpiresAt = $adminAccount->tempBan($id, $duration);
-        echo json_encode([
-            'message'        => 'Felhasználó ideiglenesen letiltva.',
-            'ban_expires_at' => $banExpiresAt
-        ]);
-
-
-    } elseif ($action == 'permBan') {
-        $id = intval($_REQUEST['id'] ?? 0);
-        $adminAccount->permBan($id);
-        echo json_encode(['message' => 'Felhasználó véglegesen letiltva.']);
-    } else {
-        echo json_encode(['error' => 'Érvénytelen művelet.']);
-    }
-} catch (Exception $e) {
-    echo json_encode(['error' => $e->getMessage()]);
-}
-?>

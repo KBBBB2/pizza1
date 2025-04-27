@@ -35,9 +35,8 @@ class Account {
         $stmt = $this->pdo->prepare("CALL getAccountLogin(?)");
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        // Lezárjuk a korábbi eredményhalmazt
         $stmt->closeCursor();
-
+    
         if (!$user) {
             return ['error' => "Érvénytelen hitelesítési adatok.", 'status' => 400];
         }
@@ -48,30 +47,30 @@ class Account {
             return ['error' => "A fiók ideiglenesen le van tiltva.", 'status' => 403];
         }
         if (password_verify($password, $user['password'])) {
-            // Lekérdezzük a felhasználó szerepét
             $stmtRole = $this->pdo->prepare("SELECT role FROM userroles WHERE id = ?");
             $stmtRole->execute([$user['id']]);
             $roleData = $stmtRole->fetch(PDO::FETCH_ASSOC);
+    
             if ($roleData) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $roleData['role'];
-                echo json_encode([
+                return [
                     "success" => "Sikeres belépés.",
                     "status" => 200,
                     "user" => array_merge($user, ["role" => $roleData['role']])
-                ]);
+                ];
             } else {
-                echo json_encode([
+                return [
                     "error" => "Felhasználóhoz nincs társítva szerep.",
                     "status" => 500
-                ]);
+                ];
             }
-            exit;
         } else {
             return ['error' => "Érvénytelen hitelesítési adatok.", 'status' => 400];
         }
     }
+    
 
     public function getUserData($userId) {
         // Nincs tárolt eljárás, raw query marad

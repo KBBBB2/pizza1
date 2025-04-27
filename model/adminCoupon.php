@@ -3,7 +3,7 @@
 
 require_once 'Database.php';
 
-class Coupon {
+class AdminCoupon {
     private $pdo;
     
     public function __construct() {

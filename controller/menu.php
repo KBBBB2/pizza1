@@ -1,184 +1,143 @@
 <?php
-// controllers/IndexedPizzaController.php
+// controller/menu.php
+require_once __DIR__ . '/../model/Pizza.php';
 
-require_once '../model/Pizza.php';
+class MenuController
+{
+    private $pizzaModel;
 
-header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    exit(0);
-}
-
-// Ha a bejövő tartalom JSON, akkor dekódoljuk és egyesítjük a $_REQUEST-t
-if (isset($_SERVER["CONTENT_TYPE"]) && strpos($_SERVER["CONTENT_TYPE"], "application/json") !== false) {
-    $rawData = file_get_contents("php://input");
-    $jsonData = json_decode($rawData, true);
-    if (is_array($jsonData)) {
-        $_REQUEST = array_merge($_REQUEST, $jsonData);
+    public function __construct($pizzaModel)
+    {
+        $this->pizzaModel = $pizzaModel;
     }
-}
 
-$method = $_SERVER['REQUEST_METHOD'];
-$pizzaModel = new Pizza();
+    public function handleRequest()
+    {
+        // CORS headers are set in public/menu.php before this call
+        $method = $_SERVER['REQUEST_METHOD'];
 
-try {
-    if ($method === 'GET') {
-        // Csak azok a pizzák, amelyek nincsenek a featured_pizzas táblában (CALL pizza_product())
-        $pizzas = $pizzaModel->getIndexedPizzas();
-        echo json_encode(["success" => true, "data" => $pizzas]);
-        exit;
-        
-    } elseif ($method === 'POST') {
-        // Képfeltöltés esetén: action = uploadPizza
-        if (isset($_POST['action']) && $_POST['action'] === 'uploadPizza') {
-            // Ellenőrizzük, hogy minden kötelező adat és a fájl is megvan-e
-            if (
-                !isset($_POST['name']) || 
-                !isset($_POST['crust']) || 
-                !isset($_POST['cutstyle']) || 
-                !isset($_POST['pizzasize']) || 
-                !isset($_POST['ingredient']) || 
-                !isset($_POST['price']) || 
-                !isset($_FILES['image'])
-            ) {
-                echo json_encode(["error" => "Hiba: hiányzó adatok!"]);
-                exit;
-            }
-            
-            // Fájl ellenőrzése: csak JPG engedélyezett
-            $file = $_FILES['image'];
-            if ($file['error'] !== UPLOAD_ERR_OK) {
-                echo json_encode(["error" => "Hiba a fájl feltöltése során!"]);
-                exit;
-            }
-            $fileName = $file['name'];
-            $fileTmp  = $file['tmp_name'];
-            $fileExt  = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-            if ($fileExt !== 'jpg') {
-                echo json_encode(["error" => "Csak JPG fájlok engedélyezettek!"]);
-                exit;
-            }
-            
-            // POST adatok
-            $name      = $_POST['name'];
-            $price     = $_POST['price'];
-            $crust     = $_POST['crust'];
-            $cutstyle  = $_POST['cutstyle'];
-            $pizzasize = $_POST['pizzasize'];
-            $ingredient= $_POST['ingredient'];
-            
-            // Pizza beszúrása az adatbázisba a modell segítségével
-            $pizzaId = $pizzaModel->insertPizza($name, $crust, $cutstyle, $pizzasize, $ingredient, $price);
-            if (!$pizzaId) {
-                echo json_encode(["error" => "Hiba történt az adatbázisba írás során."]);
-                exit;
-            }
-            
-            // Képfájl mentése:
-            $targetDir = "../assets/images/" . $pizzaId;
-            if (!is_dir($targetDir)) {
-                if (!mkdir($targetDir, 0777, true)) {
-                    echo json_encode(["error" => "Hiba a könyvtár létrehozása során!"]);
-                    exit;
-                }
-            }
-            
-            $targetFile = $targetDir . "/pizza_" . $pizzaId . "." . $fileExt;
-            if (!move_uploaded_file($fileTmp, $targetFile)) {
-                echo json_encode(["error" => "Hiba a fájl elmentése során!"]);
-                exit;
-            }
-            
-            echo json_encode([
-                "success"  => true,
-                "message"  => "Pizza sikeresen feltöltve és kép elmentve!",
-                "id"       => $pizzaId,
-                "fileExt"  => $fileExt
-            ]);
-            exit;
-            
-        } else {
-            // Egyéb POST kérések (pl. create vagy update), JSON alapú bemenettel
-            $input = $_REQUEST;
-            if (isset($input['action']) && $input['action'] === 'create') {
-                // Új pizza létrehozása
-                $fields = ['name', 'crust', 'cutstyle', 'pizzasize', 'ingredient', 'price'];
-                $data = [];
-                foreach ($fields as $field) {
-                    $data[$field] = isset($input[$field]) ? $input[$field] : null;
-                }
-                $pizzaId = $pizzaModel->insertPizza($data['name'], $data['crust'], $data['cutstyle'], $data['pizzasize'], $data['ingredient'], $data['price']);
-                if ($pizzaId) {
-                    echo json_encode(["success" => true, "id" => $pizzaId]);
-                } else {
-                    echo json_encode(["success" => false, "error" => "Insertion failed"]);
-                }
-                exit;
-            } elseif (isset($input['id'])) {
-                // Létező pizza módosítása
-                $id = $input['id'];
-                $fields = ['name', 'crust', 'cutstyle', 'pizzasize', 'ingredient', 'price'];
-                $data = [];
-                foreach ($fields as $field) {
-                    if (isset($input[$field])) {
-                        $data[$field] = $input[$field];
-                    }
-                }
-                if (empty($data)) {
-                    echo json_encode(["success" => false, "error" => "No data to update"]);
-                    exit;
-                }
-                if ($pizzaModel->updatePizza($id, $data)) {
-                    echo json_encode(["success" => true]);
-                } else {
-                    echo json_encode(["success" => false, "error" => "Update failed"]);
-                }
-                exit;
-            } else {
-                echo json_encode(["success" => false, "error" => "No valid action provided"]);
-                exit;
+        // handle image serving separately if needed
+        if ($method === 'GET' && isset($_GET['image'], $_GET['id'])) {
+            $this->serveImage((int) $_GET['id']);
+            return;
+        }
+
+        // decode JSON body
+        if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
+            $raw = file_get_contents('php://input');
+            $data = json_decode($raw, true);
+            if (is_array($data)) {
+                $_REQUEST = array_merge($_REQUEST, $data);
             }
         }
-        
-    } elseif ($method === 'DELETE') {
-        // Pizza törlése – rekord törlése az adatbázisból és a hozzátartozó kép(ek) eltávolítása
+
+        switch ($method) {
+            case 'GET':
+                $this->index();
+                break;
+
+            case 'POST':
+                $this->store();
+                break;
+
+            case 'DELETE':
+                $this->destroy();
+                break;
+
+            default:
+                http_response_code(405);
+                echo json_encode(['success' => false, 'error' => 'Unsupported method']);
+        }
+    }
+
+    private function serveImage(int $id)
+    {
+        $id = preg_replace('/D/', '', (string) $id);
+        $pattern = __DIR__ . "/../assets/images/{$id}/pizza_{$id}.*";
+        $matches = glob($pattern);
+        $file = empty($matches)
+            ? __DIR__ . "/../assets/images/default.jpg"
+            : $matches[0];
+        header('Content-Type: image/jpeg');
+        header('Content-Length: ' . filesize($file));
+        readfile($file);
+    }
+
+    private function index()
+    {
+        $pizzas = $this->pizzaModel->getIndexedPizzas();
+        foreach ($pizzas as &$pizza) {
+            $pizza['image'] = "http://" . $_SERVER['HTTP_HOST'] . "/backend/Controller/image.php?id={$pizza['id']}";
+        }
+        echo json_encode(['success' => true, 'data' => $pizzas]);
+    }
+
+    private function store()
+    {
+        if (empty($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+            http_response_code(400);
+            echo json_encode(['success'=>false,'error'=>'No image uploaded']);
+            return;
+        }
+    
+        $name      = $_POST['name']      ?? '';
+        $crust     = $_POST['crust']     ?? '';
+        $cutstyle  = $_POST['cutstyle']  ?? '';
+        $size      = $_POST['pizzasize'] ?? '';
+        $ing       = $_POST['ingredient']?? '';
+        $price     = $_POST['price']     ?? 0;
+    
+        $newId = $this->pizzaModel->insertPizza($name, $crust, $cutstyle, $size, $ing, $price);
+        if (!$newId) {
+            http_response_code(500);
+            echo json_encode(['success'=>false, 'error'=>'Record insert failed']);
+            return;
+        }
+
+        $ext = null;
+        if (!empty($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+            $targetDir = __DIR__ . '/../images/' . $newId;
+            if (!is_dir($targetDir)) mkdir($targetDir, 0755, true);
+            $dest = "$targetDir/pizza_{$newId}.$ext";
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], $dest)) {
+                http_response_code(500);
+                echo json_encode(['success'=>false, 'error'=>'File move failed']);
+                return;
+            }
+        } else {
+            http_response_code(400);
+            echo json_encode(['success'=>false,'error'=>'No image uploaded']);
+            return;
+        }
+
+        echo json_encode([ 'success' => true, 'id' => $newId, 'fileExt' => $ext ]);
+    }
+
+    private function destroy()
+    {
         $input = $_REQUEST;
         if (!isset($input['id'])) {
-            echo json_encode(["success" => false, "error" => "No id provided"]);
-            exit;
+            http_response_code(400);
+            echo json_encode(['success' => false, 'error' => 'No id provided']);
+            return;
         }
         $id = $input['id'];
-        
-        if ($pizzaModel->deletePizza($id)) {
-            // Kép(ek) törlése a ../assets/images/{id} mappából
-            $targetDir = "../assets/images/" . $id;
-            $files = glob($targetDir . "/pizza_" . $id . ".*");
-            if (!empty($files)) {
-                foreach ($files as $file) {
-                    if (file_exists($file)) {
-                        unlink($file);
-                    }
+
+        if ($this->pizzaModel->deletePizza($id)) {
+            http_response_code(200);
+
+            $dir = __DIR__ . "/../assets/images/{$id}";
+            if (is_dir($dir)) {
+                foreach (glob($dir . "/pizza_{$id}.*") as $file) {
+                    unlink($file);
                 }
-                // Ha a mappa üres, töröljük
-                if (is_dir($targetDir) && count(scandir($targetDir)) <= 2) {
-                    rmdir($targetDir);
-                }
+                if (count(scandir($dir)) <= 2) rmdir($dir);
             }
-            echo json_encode(["success" => true, "message" => "Pizza és a hozzá tartozó kép törölve"]);
+            echo json_encode(['success' => true, 'message' => 'Pizza and images deleted']);
         } else {
-            echo json_encode(["success" => false, "error" => "Deletion failed"]);
+            http_response_code(500);
+            echo json_encode(['success' => false, 'error' => 'Deletion failed']);
         }
-        exit;
-        
-    } else {
-        echo json_encode(["success" => false, "error" => "Unsupported method"]);
-        exit;
     }
-} catch (Exception $e) {
-    echo json_encode(["success" => false, "error" => $e->getMessage()]);
-    exit;
 }
-?>

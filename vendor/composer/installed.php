@@ -19,6 +19,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'firebase/php-jwt' => array(
+            'pretty_version' => 'v6.11.1',
+            'version' => '6.11.1.0',
+            'reference' => 'd1e91ecf8c598d073d0995afa8cd5c75c6e19e66',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../firebase/php-jwt',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'myclabs/deep-copy' => array(
             'pretty_version' => '1.13.0',
             'version' => '1.13.0.0',
@@ -110,9 +119,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '12.0.5',
-            'version' => '12.0.5.0',
-            'reference' => '0f177d7316ba155d36337c3811b11993b54dae32',
+            'pretty_version' => '12.0.6',
+            'version' => '12.0.6.0',
+            'reference' => 'a1c7e1e0466b6774de8edd72d91bc82400f7dfc0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),

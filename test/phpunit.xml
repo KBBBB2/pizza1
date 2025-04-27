@@ -5,7 +5,8 @@
 >
     <testsuites>
         <testsuite name="Pizza">
-            <directory>test</directory>
+            <directory>test/model</directory>
+            <directory>test/controller</directory>
         </testsuite>
     </testsuites>
 </phpunit>

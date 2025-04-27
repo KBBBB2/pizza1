@@ -76,5 +76,12 @@ class Pizza {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function updateImageExt(int $id, string $ext): bool {
+        $sql = "UPDATE pizza SET image_ext = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([$ext, $id]);
+    }
+    
 }
 ?>

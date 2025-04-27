@@ -1,77 +1,56 @@
 <?php
-// controllers/AdminCouponController.php
+require_once __DIR__ . '/../model/adminCoupon.php';
 
-require_once '../model/adminCoupon.php';
+function handleRequest($method, $request, $input = null) {
+    $couponModel = new AdminCoupon();
+    $action = $request['action'] ?? 'read';
 
-header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+    try {
+        switch ($action) {
+            case 'read':
+                $q = $request['q'] ?? '';
+                $coupons = $couponModel->readCoupons($q);
+                return ['status' => 200, 'data' => $coupons];
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    exit(0);
-}
+            case 'create':
+                $data = [ 
+                    'name'             => $request['name'] ?? '',
+                    'description'      => $request['description'] ?? '',
+                    'code'             => $request['code'] ?? '',
+                    'discount_type'    => $request['discount_type'] ?? '',
+                    'discount_value'   => $request['discount_value'] ?? 0,
+                    'expiration_date'  => $request['expiration_date'] ?? null,
+                    'is_active'        => $request['is_active'] ?? 0,
+                ];
+                $id = $couponModel->createCoupon($data);
+                return $id ? ['status' => 200, 'data' => ['success' => true, 'id' => $id]] 
+                           : ['status' => 500, 'data' => ['error' => 'Insertion failed']];
 
-if (isset($_SERVER["CONTENT_TYPE"]) && strpos($_SERVER["CONTENT_TYPE"], "application/json") !== false) {
-    $rawData = file_get_contents("php://input");
-    $jsonData = json_decode($rawData, true);
-    if (is_array($jsonData)) {
-        $_REQUEST = array_merge($_REQUEST, $jsonData);
+            case 'update':
+                $data = [
+                    'id'               => $request['id'] ?? 0,
+                    'name'             => $request['name'] ?? '',
+                    'description'      => $request['description'] ?? '',
+                    'code'             => $request['code'] ?? '',
+                    'discount_type'    => $request['discount_type'] ?? '',
+                    'discount_value'   => $request['discount_value'] ?? 0,
+                    'expiration_date'  => $request['expiration_date'] ?? null,
+                    'is_active'        => $request['is_active'] ?? 0,
+                ];
+                $ok = $couponModel->updateCoupon($data);
+                return $ok ? ['status' => 200, 'data' => ['success' => true]]
+                           : ['status' => 500, 'data' => ['error' => 'Update failed']];
+
+            case 'delete':
+                $id = $request['id'] ?? 0;
+                $ok = $couponModel->deleteCoupon($id);
+                return $ok ? ['status' => 200, 'data' => ['success' => true]]
+                           : ['status' => 500, 'data' => ['error' => 'Deletion failed']];
+
+            default:
+                return ['status' => 400, 'data' => ['error' => 'Invalid action']];
+        }
+    } catch (Exception $e) {
+        return ['status' => 500, 'data' => ['error' => $e->getMessage()]];
     }
 }
-
-$action = $_REQUEST['action'] ?? 'read';
-
-$couponModel = new Coupon();
-
-try {
-    if ($action == 'read') {
-        $q = $_REQUEST['q'] ?? '';
-        $coupons = $couponModel->readCoupons($q);
-        echo json_encode($coupons);
-    } elseif ($action == 'create') {
-        $data = [
-            'name'             => $_REQUEST['name'] ?? '',
-            'description'      => $_REQUEST['description'] ?? '',
-            'code'             => $_REQUEST['code'] ?? '',
-            'discount_type'    => $_REQUEST['discount_type'] ?? '',
-            'discount_value'   => $_REQUEST['discount_value'] ?? 0,
-            'expiration_date'  => $_REQUEST['expiration_date'] ?? null,
-            'is_active'        => $_REQUEST['is_active'] ?? 0,
-        ];
-        $id = $couponModel->createCoupon($data);
-        if ($id) {
-            echo json_encode(["success" => true, "id" => $id]);
-        } else {
-            echo json_encode(["error" => "Insertion failed"]);
-        }
-    } elseif ($action == 'update') {
-        $data = [
-            'id'               => $_REQUEST['id'] ?? 0,
-            'name'             => $_REQUEST['name'] ?? '',
-            'description'      => $_REQUEST['description'] ?? '',
-            'code'             => $_REQUEST['code'] ?? '',
-            'discount_type'    => $_REQUEST['discount_type'] ?? '',
-            'discount_value'   => $_REQUEST['discount_value'] ?? 0,
-            'expiration_date'  => $_REQUEST['expiration_date'] ?? null,
-            'is_active'        => $_REQUEST['is_active'] ?? 0,
-        ];
-        if ($couponModel->updateCoupon($data)) {
-            echo json_encode(["success" => true]);
-        } else {
-            echo json_encode(["error" => "Update failed"]);
-        }
-    } elseif ($action == 'delete') {
-        $id = $_REQUEST['id'] ?? 0;
-        if ($couponModel->deleteCoupon($id)) {
-            echo json_encode(["success" => true]);
-        } else {
-            echo json_encode(["error" => "Deletion failed"]);
-        }
-    } else {
-        echo json_encode(["error" => "Invalid action"]);
-    }
-} catch (Exception $e) {
-    echo json_encode(["error" => $e->getMessage()]);
-}
-?>
