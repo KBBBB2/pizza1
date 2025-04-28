@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/Payment.css">
+  <title>Fizetés</title>
+  <style>
+    /* Példa stílus a fizetési mód opciókhoz */
+    .payment-method-options {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .payment-option {
+      cursor: pointer;
+      text-align: center;
+    }
+    .payment-option input[type="radio"] {
+      display: none;
+    }
+    .payment-option img.payment-icon {
+      width: 70px;
+      height: auto;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+    .payment-option.selected img.payment-icon,
+    .payment-option:hover img.payment-icon {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Popup értesítő (toast) konténer -->
+  <div id="popup-notification" class="popup-notification"></div>
+
+  <div id="layout-container"></div>
+
+  <section class="payment-section">
+    <div class="payment-details">
+      <h2>Szállítási adatok</h2>
+      <div class="name-fields">
+        <div class="input-container">
+          <span id="first-name-error" class="error-message"></span>
+          <input type="text" id="first-name" name="first-name" placeholder="Keresztnév" required>
+        </div>
+        <div class="input-container">
+          <span id="last-name-error" class="error-message"></span>
+          <input type="text" id="last-name" name="last-name" placeholder="Vezetéknév" required>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <span id="address-error" class="error-message"></span>
+        <input type="text" id="address" name="address" placeholder="Cím" required>
+      </div>
+
+      <div class="city-zip">
+        <div class="input-container">
+          <span id="city-error" class="error-message"></span>
+          <input type="text" id="city" name="city" placeholder="Város" required>
+        </div>
+        <div class="input-container">
+          <span id="zip-error" class="error-message"></span>
+          <input type="text" id="zip" name="zip" placeholder="Irányítószám" required>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <span id="phone-error" class="error-message"></span>
+        <input type="text" id="phone" name="phone" placeholder="Telefonszám" required>
+      </div>
+
+      <h3>Fizetési mód</h3>
+      <div class="input-container payment-method-options">
+        <label class="radio-card">
+          <input type="radio" name="payment-method" value="cash">
+          <span class="custom-radio"></span>
+          <img src="/Layout/design images/payment/cash.png" alt="Készpénz" class="payment-icon">
+        </label>
+        <label class="radio-card inactive-radio">
+          <input type="radio" name="payment-method" value="card" disabled>
+          <span class="custom-radio"></span>
+          <img src="/Layout/design images/payment/credit-card.png" alt="Bankkártya" class="payment-icon">
+        </label>        
+      </div>
+    
+      <!-- Kártyás fizetés szekció: bent marad a payment-details-ben -->
+      <div id="card-payment-section" class="card-details" style="display: none;">    
+      </div>
+      
+      <div class="p-3 border border-2 border-danger rounded-3 bg-light d-flex align-items-center gap-3 mt-3 shadow-sm">
+        <i class="bi bi-cash-coin fs-2 text-danger"></i>
+        <div>
+            <h6 class="mb-1 text-danger fw-bold">Fontos információ</h6>
+            <p class="mb-0 text-dark">A rendelés kifizetése csak készpénzben lehetséges!</p>
+        </div>
+      </div>
+      <br>
+      
+    
+      <!-- Fizetés összeg + gombok -->
+      <div class="total-amount">
+        <p><strong>Fizetendő összeg:</strong> <span id="total-amount">0 Ft</span></p>
+      </div>
+      <div class="payment-buttons">
+        <a href="Cart.html" type="button" class="back-button">Vissza</a>
+        <button type="submit" class="pay-button" id="submit-payment">Fizetés</button>
+      </div>
+    </div>
+
+    <img src="/Layout/design images/pizza-image.png" alt="Pizza" class="pizza-image">
+  </section>
+
+  <script src="/Layout/Layout.js"></script>
+  <script src="/assets/js/Payment.js"></script>
+</body>
+<footer>
+  <p>&copy; 2025 Pizzabázis</p>
+</footer>
+</html>

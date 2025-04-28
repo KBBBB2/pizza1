@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../assets/css/MainPage.css">
+    <title>PizzaBázis</title>
+</head>
+<body>
+
+    <div id="layout-container"></div>
+
+    <!-- Kosár modal -->
+    <div id="cart-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+        </div>
+    </div>  
+
+    <!-- Popup értesítő (toast) konténer -->
+<div id="popup-notification" class="popup-notification"></div>
+
+
+    <!-- Üdvözlő szakasz -->
+    <section class="welcome">
+        <h1>Üdvözlünk a PizzaBázis oldalán</h1>
+        <div class="welcome-content">
+            <div class="text-box">
+                <p>Nálunk eredeti olasz</p> <p>recept alapján készülnek</p> <p>a pizzák.</p><br>
+                <a href="Menu.html" type="submit" class="order-button">Rendelj tőlünk most!</a>
+            </div>
+            <img src="/Layout/design images/pizza-image.png" alt="Pizza" class="pizza-image">
+        </div>
+    </section>
+
+    <!-- Kiemelt pizzák szakasz Bootstrap kártyákkal -->
+    <section class="highlight">
+        <h2 class="highlight-title text-center">Kiemelt pizzáink</h2>
+        <div class="row g-0">
+            <div class="row justify-content-center g-0" id="featured-pizzas">
+                <!-- Itt jelennek majd meg a JS által betöltött pizzák -->
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="Menu.html" type="submit"  class="more-pizzas-button">További pizzáink</a>
+        </div>
+    </section>
+
+    <!-- Miért rendelj szakasz -->
+    <section class="why-order">
+        <h2>Miért rendelj a PizzaBázistól?</h2>
+        <ul>
+            <li>Eredeti olasz kézzel készített pizzáink vannak</li>
+            <li>Regisztrálva sok-sok kuponhoz hozzá tudsz jutni</li>
+            <li>Első rendelésedet gyorsan és könnyen újra tudod rendelni</li>
+        </ul>
+    </section>
+
+    <script src="/Layout/Layout.js"></script>
+    <script src="/assets/js/cart.js"></script>
+    <script src="/assets/js/featuredPizza.js"></script>
+
+</body>
+
+  <!-- Lábléc -->
+  <footer>
+    <p>&copy; 2025 Pizzabázis</p>
+</footer>
+</html>

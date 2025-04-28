@@ -1,0 +1,298 @@
+/* Üdvözlő szakasz */
+.welcome {
+    background-color: white;
+    text-align: center;
+    padding: 2rem;
+    flex-grow: 1;
+}
+
+/* Üdvözlő szakasz módosítása */
+.welcome-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    height: 47.5rem;
+    flex-grow: 1;
+    padding-left: 100px;
+}
+
+.text-box {
+    background-color: #ccffcc;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 40%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 28px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.order-button {
+    background-color: #ff7a21;
+    color: black;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    width: 45%;
+    height: 60px;
+    font-size: 20px;
+    line-height: 0.5;
+    text-decoration: none;
+    padding-top: 23px;
+}
+
+.order-button:hover {
+    background-color: #e66a1c; 
+}
+
+/* Kiemelt pizzák szekció */
+.highlight {
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
+
+.highlight-title {
+    background-color: #ccffcc;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    display: block; 
+    box-sizing: border-box;
+}
+
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background-color: #ccffcc;
+    padding: 20px;
+}
+
+.card-body {
+    background-color: #ccffcc;
+    text-align: center;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Általánosan minden details ul-re érvényes, nem csak a menüre */
+details ul {
+    overflow: hidden;
+    max-height: 0;              /* Alapesetben zárt állapot */
+    transition: max-height 0.5s ease-in-out;
+}
+
+/* Nyitott állapot: ha a parent details elem nyitva van */
+details[open] ul {
+    max-height: 500px; /* vagy nagyobb érték, ha sok a tartalom */
+}
+
+
+.more-pizzas-button {
+    background-color: #ff7a21;
+    color: black;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    margin: 1rem auto; 
+    border-radius: 40px;
+    width: 270px;
+    height: 60px;
+    font-size: 20px;
+    line-height: 0.5;
+    display: block; 
+    transition: background-color 0.3s ease-in-out;
+    text-decoration: none;
+    padding-top: 23px;
+}
+
+.more-pizzas-button:hover {
+    background-color: #e66a1c; 
+}
+
+/* Miért rendelj szekció */
+.why-order {
+    background-color: white;
+    padding: 2rem;
+    text-align: center;
+    font-size: 20px;
+}
+
+.why-order ul {
+    list-style: none;
+    padding: 4rem;
+}
+
+.why-order ul li {
+    margin-bottom: 1rem;
+}
+
+.cart-img {
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.summary {
+    margin: 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
+#featured-pizzas {
+    gap: 20px;
+}
+
+.pizza-image {
+    max-width: 45%;
+    width: 550px !important;
+    height: auto !important;
+    right: -32px !important;
+    position: relative;
+}
+  
+/* Reszponzív beállítások */
+@media (max-width: 900px) {
+    .welcome-content {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding-left: 0px;
+    }
+
+    .text-box {
+        margin: 0 auto 2rem;
+        width: 50%;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 1600px) {
+    .order-button {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1015px) {
+    .order-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-box {
+        font-size: 20px;
+        width: 100%;
+    }
+
+    .welcome-content {
+        padding-left: 0px;
+    }
+
+    .order-button {
+        width: 50%;
+    }
+
+    .more-pizzas-button {
+        width: 40%;
+        font-size: 18px;
+        height: 50px;
+    }
+
+    .why-order {
+        font-size: 18px;
+    }
+
+    .pizza-image {
+        display: none !;
+    }
+}
+
+@media (max-width: 570px) {
+    .order-button{
+        width: 90%;
+    }
+
+    .more-pizzas-button{
+        width: 60%;
+    }
+}
+
+@media (max-width: 400px) {
+    .order-button{
+        width: 100%;
+    }
+
+}
+
+/* Alapértelmezett állapot: el van rejtve, és egy kis eltolódás van */
+.fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 2s ease-out, transform 0.5s ease-out;
+}
+
+/* Látható állapot: az elem visszatér eredeti helyzetébe, és látszik */
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Popup értesítő alapstílusok: helyezzük el az ablakot a jobb alsó sarokban, háttér, padding stb. */
+.popup-notification {
+    position: fixed;
+    top: 150px;             /* A képernyő tetejétől 20px-re */
+    left: 50%;             /* A bal oldaltól 50% */
+    transform: translateX(-50%) translateY(20px); /* Vízszintesen középre, vertikálisan animációhoz kezdetben 20px lejjebb */
+    background: #fefefe;
+    color: #333;
+    padding: 15px 20px;
+    border: 2px solid #888;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1100;
+    pointer-events: none;  /* Nem akadályozza a kattintásokat */
+    opacity: 0;
+    /* Az animációk később felülírják majd a kezdeti beállításokat */
+}
+
+
+/* Animáció beúszáshoz */
+@keyframes popupShow {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes popupHide {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+}

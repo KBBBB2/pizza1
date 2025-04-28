@@ -1,0 +1,176 @@
+.pban-button {
+      transition: all 0.3s ease;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .pban-button:hover {
+      background-color: #e60000;
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+    
+    .pban-button:active {
+      transform: scale(0.95);
+      background-color: #cc0000;
+    }
+    
+    .tban-button {
+      transition: all 0.3s ease;
+      background-color: #ff7a21;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .tban-button:hover {
+      background-color: #e66a1c; 
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+    
+    .tban-button:active {
+      transform: scale(0.95);
+      background-color: #ff922b;
+    }
+
+    .confirmBtn {
+      transition: all 0.3s ease;
+      background-color: #ffc107;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .confirmBtn:hover {
+      background-color: #e0a800; 
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+    
+    .confirmBtn:active {
+      transform: scale(0.95);
+      background-color: #efb506;
+    }
+    
+    .search-wrapper {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+  }
+
+/* Confirm modal stílusok */
+.modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none; /* alapból rejtett */
+  align-items: center;
+  justify-content: center;
+}
+.modal .modal-content {
+  background: #ccffcc;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.4s ease;
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Confirm modal stílusok */
+#confirmModal {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none; /* Alapból rejtett */
+  align-items: center;
+  justify-content: center;
+}
+
+#confirmModal .modal-content {
+  background: #ccffcc;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.4s ease;
+}
+
+.confirm-buttons {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.confirm-buttons button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.confirm-buttons .btn-danger {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.confirm-buttons .btn-danger:hover {
+  background-color: #e60000;
+}
+
+.confirm-buttons .btn-secondary {
+  background-color: #ff922b;
+  color: white;
+}
+
+.confirm-buttons .btn-secondary:hover {
+  background-color: #e66a1c;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

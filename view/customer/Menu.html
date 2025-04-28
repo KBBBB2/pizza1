@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menü</title>
+    <link rel="stylesheet" href="/assets/css/menu.css">
+</head>
+
+<body>
+
+    <div id="layout-container"></div>
+    
+    <!-- Kosár modal -->
+    <div id="cart-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+        </div>
+    </div>
+
+    <!-- Pizzák listája -->
+    <section class="container my-4">
+        <h2 class="text-center mb-4">Menü</h2>
+        <div id="menu-list" class="row g-4">Adatok betöltése...</div>
+    </section>
+
+    <script src="/Layout/Layout.js"></script>
+    <script src="/assets/js/cart.js"></script>
+    <script src="/assets/js/menu.js"></script>
+
+</body>
+
+<!-- Lábléc -->
+<footer class="text-center mt-4">
+    <p>&copy; 2025 Pizzabázis</p>
+</footer>
+
+</html>

@@ -1,0 +1,178 @@
+/* Általános stílusok */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Header stílus */
+header {
+  background-color: #ccffcc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.header-left img {
+  width: 80px;
+}
+.header-right .button {
+  background-color: #ff7a21;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  text-decoration: none;
+}
+.header-right .button:hover {
+  background-color: #e66a1c;
+}
+
+.tableMain {
+  padding-bottom: 100px;
+}
+
+/* Közös gomb stílus (pl. "Rendelés felvétele") */
+.button {
+  background-color: #ff7a21;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  text-decoration: none;
+}
+.button:hover {
+  background-color: #e66a1c;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* Egyedi táblázat stílus */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th,
+.custom-table td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  border-bottom: 3px solid #6d776d; /* halvány zöldes szegély */
+}
+
+.custom-table thead {
+  background-color: #c8e6c9; /* zöldes fejléc */
+  color: #333;
+}
+
+.custom-table tbody tr {
+  background-color: #e4f0e4; /* világos zöld háttér */
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #d0e0d0; /* szürkés-zöld a páros sorokra */
+}
+
+/* Művelet oszlop szélessége és igazítása */
+.action-cell {
+  width: 140px;
+  text-align: center;
+}
+
+.table-responsive {
+  border-left: 3px solid #6d776d;
+  border-right: 3px solid #6d776d;
+  border-top: 3px solid #6d776d;
+}
+
+.container {
+  width: 800px;
+}
+
+@media (max-width: 600px) {
+  .container{
+    width: 100%;
+  }
+}
+
+/* overlay a háttér elsötétítéséhez */
+.confirm-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  display: none;
+}
+
+/* maga a popup */
+.confirm-popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ccffcc;
+  padding: 1.5rem 2rem;
+  border: 2px solid #888;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1100;
+  display: none;
+  text-align: center;
+}
+
+.confirm-popup p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.confirm-buttons .btn {
+  margin: 0 0.5rem;
+  min-width: 100px;
+}
+
+.not-logout {
+  background-color: #ff7a21;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.not-logout:hover {
+  background-color: #e66a1c;
+  color: black;
+}
+
+.logout {
+  background-color: #ff4d4d;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.logout:hover {
+  background-color: #e60000;
+  color: black;
+}

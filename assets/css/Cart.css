@@ -1,0 +1,239 @@
+/* Kosár tartalom */
+.cart-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 6rem;
+    gap: 2rem;
+    background-color: white;
+    flex-grow: 1;
+}
+
+.cart-items {
+    flex: 2;
+    background-color: #ccffcc;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.cart-items .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-items .item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+}
+
+.cart-items .item-details {
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.cart-items .item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-items .item-actions button {
+    background-color: #ff7a21;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Távolítsuk el a felsorolásjeleket a kosár listából */
+#cart-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+/* Elválasztó vonal hozzáadása a kosár tételei között */
+#cart-list ul li {
+    padding: 10px 0;
+    border-bottom: 2px solid #2c2c2c;
+    border-radius: 0px;
+  }
+  
+#cart-list ul li:last-child {
+    border-bottom: none;
+  }
+  
+  
+
+.cart-summary {
+    flex: 1;
+    background-color: #ccffcc;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.cart-summary input {
+    width: calc(100% - 100px);
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.cart-summary .button {
+    background-color: #ff7a21;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.cart-summary button {
+    background-color: #ff7a21;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.cart-items .item-actions button:hover {
+    background-color: #e66a1c;
+}
+
+.cart-summary .button:hover {
+    background-color: #e66a1c;
+}
+
+.remove-button:hover {
+    background-color: #e66a1c;
+}
+
+.cart-summary .total {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.cart-summary .discount {
+    margin-top: 1.5rem;
+}
+
+input {
+    background-color: #fff3d7;
+}
+
+/* Reszponzív beállítások */
+@media (max-width: 1250px) {
+    .cart-section {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pizza-image {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .cart-items {
+        width: 75%;
+    }
+}
+
+@media (max-width: 650px) {
+    .cart-items {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-items .item img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .cart-summary button {
+        width: 100%;
+    }
+}
+
+/* --- Animáció: ugráló effektus --- */
+@keyframes jump {
+    0% {
+      transform: translateY(0) scale(1);
+    }
+    30% {
+      transform: translateY(-10px) scale(1.3);
+    }
+    60% {
+      transform: translateY(0) scale(0.9);
+    }
+    100% {
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* A kosár badge animációhoz (a te HTML-edben id="cart-counter") */
+  #cart-counter.animate {
+    animation: jump 0.5s ease;
+  }
+  
+  
+  /* Popup értesítő alapstílusok: helyezzük el az ablakot a jobb alsó sarokban, háttér, padding stb. */
+.popup-notification {
+    position: fixed;
+    top: 150px;             /* A képernyő tetejétől 20px-re */
+    left: 50%;             /* A bal oldaltól 50% */
+    transform: translateX(-50%) translateY(20px); /* Vízszintesen középre, vertikálisan animációhoz kezdetben 20px lejjebb */
+    background: #fefefe;
+    color: #333;
+    padding: 15px 20px;
+    border: 2px solid #888;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1100;
+    pointer-events: none;  /* Nem akadályozza a kattintásokat */
+    opacity: 0;
+    /* Az animációk később felülírják majd a kezdeti beállításokat */
+}
+
+
+/* Animáció beúszáshoz */
+@keyframes popupShow {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes popupHide {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+}

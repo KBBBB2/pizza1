@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/Cart.css">
+    <title>Kosár</title>
+</head>
+
+<body>
+    
+    <div id="layout-container"></div>
+
+    <!-- Tartalom -->
+    <section class="cart-section">
+        <div class="cart-items">
+            <h2>Termékek</h2><br>
+            <div id="cart-list">
+                <!-- Itt fognak megjelenni a kosár tételei -->
+            </div>
+        </div>
+
+        <div class="cart-summary">
+            <h2>Kupon és Összegzés</h2>
+            <!-- Kupon beváltása -->
+            <input id="coupon-code" type="text" placeholder="Kupon kód:">
+            <button id="apply-coupon" class="button btn">Kupon beváltása</button>
+            <p>Teljes összeg: <span id="total-price">0 Ft</span></p>
+            <p>Kedvezmény: <span id="coupon-discount">0 Ft</span></p>
+            <p>Fizetendő összeg: <span id="payable-price">0 Ft</span></p>
+        
+            <div class="d-flex flex-column">
+                <a href="Menu.html" class="continue-shopping button btn">Vásárlás folytatása</a>
+                <a href="Payment.html" id="checkout-button" class="checkout button btn">Tovább a Fizetéshez</a>
+            </div>
+            
+        
+                         <!-- Figyelmeztető doboz - csak készpénzes fizetés -->
+                         <div class="p-3 border border-2 border-danger rounded-3 bg-light d-flex align-items-center gap-3 mt-3 shadow-sm">
+                            <i class="bi bi-cash-coin fs-2 text-danger"></i>
+                            <div>
+                                <h6 class="mb-1 text-danger fw-bold">Fontos információ</h6>
+                                <p class="mb-0 text-dark">A rendelés kifizetése csak készpénzben lehetséges!</p>
+                            </div>
+                        </div>
+        </div>
+
+        
+    </section>
+    
+    <script src="/Layout/Layout.js"></script>
+    <script src="/assets/js/cart.js"></script>
+
+</body>
+<footer>
+    <p>&copy; 2025 Pizzabázis</p>
+</footer>
+
+</html>

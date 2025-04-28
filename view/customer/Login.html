@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/Login.css">
+    <title>Belépés</title>
+</head>
+
+<body>
+
+    <div id="layout-container"></div>
+
+    <section class="login-section">
+        <div class="login-form">
+            <form id="loginForm">
+                <div id="loginMessage" class="message"></div>
+                <!-- Felhasználónév mező -->
+                <div class="form-group" id="loginUserGroup">
+                    <input type="text" id="login_username" placeholder="Felhasználónév" required>
+                </div>
+                <!-- Jelszó mező -->
+                <div class="form-group" id="loginPasswordGroup">
+                    <input type="password" id="login_password" placeholder="Jelszó" required>
+                </div>
+                <!-- Email mező, csak jelszó visszaállításhoz -->
+                <div class="form-group" id="loginEmailGroup" style="display: none;">
+                    <input type="email" id="login_email" placeholder="Email cím">
+                </div>
+                <!-- Belépés/Jelszó visszaállítása gomb -->
+                <button type="submit" id="loginSubmit" class="login-button">Belépés</button>
+                <!-- Átváltó gomb: Elfelejtettem a jelszót / Vissza -->
+                <button type="button" id="toggleForgotPassword" class="login-button">Elfelejtettem a jelszót</button>
+            </form>
+        </div>
+        <img src="/Layout/design images/pizza-image.png" alt="Pizza" class="pizza-image">
+    </section>
+
+    <script src="/Layout/Layout.js"></script>
+    <script src="/assets/js/Login.js"></script>
+
+</body>
+
+<footer>
+    <p>&copy; 2025 Pizzabázis</p>
+</footer>
+
+</html>

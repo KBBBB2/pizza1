@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <script src="/assets/js/admin/auth.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/adminStyles/admin.css">
+  <link rel="stylesheet" href="/assets/css/adminStyles/coupon.css">
+  <title>Kupon Kezelő</title>
+</head>
+<body>
+
+<!-- Navigációs Sáv -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #ccffcc;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/view/customer/mainpage.html"> 
+      <img src="/Layout/design images/pizza_logo.png" alt="Pizza Logo" class="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="btn text-black rounded-pill px-4 adminPanelButtons" href="account.html"><b>Fiók</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="btn text-black rounded-pill px-4 adminPanelButtons" href="coupon.html"><b>Kupon</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="btn text-black rounded-pill px-4 adminPanelButtons" href="menu.html"><b>Menü</b></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Keresés -->
+      <h1 class="text-center mb-4 display-6 fw-bold ">Kupon Kezelő</h1>
+
+      <div class="search-wrapper">
+        <div class="input-group shadow-sm">
+          <input type="text" id="couponTypeSearchInput" class="form-control" placeholder="🔍 Keresés a kuponok között...">
+        </div>
+      </div>
+      
+
+    <!-- Tábla -->
+    <div class="custom-table-container">
+      <table id="couponTable" class="custom-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Név</th>
+            <th>Leírás</th>
+            <th>Kód</th>
+            <th>Kedvezmény típusa</th>
+            <th>Kedvezmény értéke</th>
+            <th>Lejárati dátum</th>
+            <th>Aktív</th>
+            <th>Műveletek</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider text-center">
+          <!-- Itt töltjük be az adatokat -->
+        </tbody>
+      </table>
+    </div>
+
+<!-- Kupon szerkesztés modal -->
+<div id="editModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <h3>Kupon szerkesztése</h3>
+    <form id="editCouponForm">
+      <input type="hidden" id="editCouponId">
+
+      <label for="editName">Név:</label><br>
+      <input type="text" id="editName" required><br><br>
+
+      <label for="editDescription">Leírás:</label><br>
+      <input type="text" id="editDescription" required><br><br>
+
+      <label for="editCode">Kód:</label><br>
+      <input type="text" id="editCode" required><br><br>
+
+      <label for="editDiscountType">Kedvezmény Típus:</label><br>
+      <input type="text" id="editDiscountType" required><br><br>
+
+      <label for="editDiscountValue">Kedvezmény Érték:</label><br>
+      <input type="text" id="editDiscountValue" required><br><br>
+
+      <label for="editExpirationDate">Lejárat:</label><br>
+      <input type="date" id="editExpirationDate" required><br><br>
+
+      <label for="editIsActive">Státusz:</label><br>
+      <select id="editIsActive">
+        <option value="1">Aktív</option>
+        <option value="0">Inaktív</option>
+      </select><br><br>
+
+      <button type="button" onclick="saveCoupon()" class="save-btn">Mentés</button>
+      <button type="button" onclick="cancelEdit()" class="cancel-btn">Mégse</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal űrlap új kuponhoz -->
+<div id="addCouponModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <h2>Új Kupon Hozzáadása</h2>
+    <form id="addCouponForm">
+      <div class="form-group">
+        <label for="newName">Kupon Név:</label>
+        <input type="text" id="newName" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="newDescription">Leírás:</label>
+        <input type="text" id="newDescription" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="newCode">Kupon Kód:</label>
+        <input type="text" id="newCode" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="newDiscountType">Kedvezmény Típus:</label>
+        <input type="text" id="newDiscountType" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="newDiscountValue">Kedvezmény Értéke:</label>
+        <input type="number" id="newDiscountValue" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="newExpirationDate">Lejárat Dátuma:</label>
+        <input type="datetime-local" id="newExpirationDate" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="newIsActive">Aktív:</label>
+        <select id="newIsActive" class="form-control" required>
+          <option value="1">Aktív</option>
+          <option value="0">Inaktív</option>
+        </select>
+      </div>
+      <div class="form-group text-center">
+        <button type="submit" class="save-btn">Mentés</button>
+        <button type="button" class="cancel-btn" onclick="closeAddCouponModal()">Mégse</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+    <!-- Új Kupon Gomb középen -->
+    <div class="text-center mt-4">
+      <button id="addCouponBtn" class="btn px-4 py-2">+ Új Kupon Hozzáadása</button>
+    </div><br><br><br><br>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/js/admin/coupon.js"></script>
+
+</body>
+</html>

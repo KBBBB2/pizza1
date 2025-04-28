@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <script src="/assets/js/admin/auth.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/adminStyles/admin.css">
+  <link rel="stylesheet" href="/assets/css/adminStyles/menu.css">
+  <title>Pizza Adatbázis</title>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+
+<!-- Navigációs Sáv -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #ccffcc;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/view/customer/mainpage.html"> 
+      <img src="/Layout/design images/pizza_logo.png" alt="Pizza Logo" class="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="btn text-black rounded-pill px-4 adminPanelButtons" href="account.html"><b>Fiók</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="btn text-black rounded-pill px-4 adminPanelButtons" href="coupon.html"><b>Kupon</b></a>
+        </li>
+        <li class="nav-item">
+          <a class="btn text-black rounded-pill px-4 adminPanelButtons" href="menu.html"><b>Menü</b></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Keresés és Új rekord hozzáadás -->
+  <h1 class="text-center mb-4 display-6 fw-bold">Pizza Adatbázis</h1>
+  
+  <div class="search-wrapper">
+    <div class="input-group shadow-sm">
+      <input type="text" id="search" class="form-control" placeholder="🔍 Keresés a pizzák között...">
+    </div>
+  </div>
+
+  <!-- Tábla -->
+  <div class="custom-table-container">
+    <table id="pizzaTable"class="custom-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Név</th>
+          <th>Tészta</th>
+          <th>Vágás módja</th>
+          <th>Méret</th>
+          <th>Összetevők</th>
+          <th style="min-width: 100px;">Ár</th>
+          <th>Műveletek</th>
+          <th>Kép</th> <!-- Ezen a helyen jelenítheted meg a képet -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Itt töltjük be az adatokat -->
+      </tbody>
+    </table>
+</div>
+
+
+<!-- Új hozzáadása gomb -->
+<div class="d-flex justify-content-center mt-4">
+  <button id="add-new" class="btn px-4 py-2">+ Új hozzáadása</button>
+</div>
+
+<!-- Pizza szerkesztés modal -->
+<div id="editModal" class="modal" style="display:none;">
+  <div class="modal-content" style=" max-height: 70vh;">
+    <h2>Pizza módosítása</h2>
+    <form id="editForm">
+      <input type="hidden" id="editId">
+      <label>Név:<br><input type="text" id="editName" required></label><br><br>
+      <label>Tészta:<br><input type="text" id="editCrust" required></label><br><br>
+      <label>Vágás módja:<br><input type="text" id="editCutstyle" required></label><br><br>
+      <label>Méret:<br><input type="text" id="editSize" required></label><br><br>
+      <label>Összetevők:<br><input type="text" id="editIngredient" required></label><br><br>
+      <label>Ár:<br><input type="number" id="editPrice" required></label><br><br>
+      <button type="submit" class="save-btn">Mentés</button>
+      <button type="button" class="cancel-btn" onclick="closeModal()">Mégsem</button>
+    </form>
+  </div>
+</div>
+
+<!-- Pizza hozzáadása modal -->
+  <div id="addPizzaModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2>Új Pizza hozzáadása</h2>
+      <form id="addPizzaForm" enctype="multipart/form-data">
+        <label>Név:<br><input type="text" id="newName" name="name" required></label><br><br>
+        <label>Tészta:<br><input type="text" id="newCrust" name="crust" required></label><br><br>
+        <label>Vágás módja:<br><input type="text" id="newCutstyle" name="cutstyle" required></label><br><br>
+        <label>Méret:<br><input type="text" id="newSize" name="pizzasize" required></label><br><br>
+        <label>Összetevők:<br><input type="text" id="newIngredient" name="ingredient" required></label><br><br>
+        <label>Ár:<br><input type="number" id="newPrice" name="price" required></label><br><br>
+        <label>Pizza Kép:<br><input type="file" id="newImage" name="image" accept="image/jpeg" required></label><br><br>
+        <button type="submit" class="save-btn">Mentés</button>
+        <button type="button" class="cancel-btn" onclick="closeAddPizzaModal()">Mégsem</button>
+      </form>
+    </div>
+  </div><br><br><br><br>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/admin/pizza.js"></script>
+<script src="/assets/js/admin/modals.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,310 @@
+thead th {
+  font-size: 0.875rem;
+}
+
+.modal {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 110vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #ccffcc;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px; 
+  max-width: 90%;
+  max-height: 70vh; 
+  overflow-y: auto; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.centered-modal {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+#editModal input[type="text"],
+#editModal input[type="date"],
+#editModal select,
+#addCouponModal input[type="text"],
+#addCouponModal input[type="date"],
+#addCouponModal select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.save-btn, .cancel-btn {
+  width: 100%;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+}
+
+.save-btn {
+  background-color: #ff7a21;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #e66a1c;
+  color: white;
+
+}
+
+.save-btn:active {
+  transform: scale(0.95);
+  background-color: #ff922b;
+}
+
+.cancel-btn {
+  background-color: #ffc107;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #e0a800;
+  color: white;
+
+}
+
+.cancel-btn:active {
+  transform: scale(0.95);
+  background-color: #efb506;
+}
+
+.edit-btn, .delete-btn{
+  width: 110px;
+}
+
+.edit-btn {
+  background-color: #ff922b;
+}
+
+.edit-btn:hover {
+  background-color: #e66a1c;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.179);
+  cursor: pointer;
+}
+
+.edit-btn:active {
+  transform: scale(0.95);
+  background-color: #e66a1c;
+}
+
+.delete-btn {
+  background-color: #ff4d4d;
+}
+
+.delete-btn:hover {
+  background-color: #e60000;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.delete-btn:active {
+  transform: scale(0.95);
+  background-color: #cc0000;
+}
+
+.action-buttons div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#addCouponBtn {
+  transition: all 0.3s ease;
+  background-color: #ccffcc;
+  color: black;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#addCouponBtn:hover {
+  background-color: #a0f5a0;
+  transform: scale(1.05);
+}
+
+#addCouponBtn:active {
+  transform: scale(0.95);
+  background-color: #abfdab;
+}
+
+.edit-btn, .delete-btn {
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+button {
+  margin: 2px;
+  display: inline-block;
+  text-align: center;
+}
+
+.edit-input {
+  background-color: #fff3d7;
+}
+
+.search-wrapper {
+max-width: 1100px;
+width: 100%;
+margin: 0 auto;
+padding-bottom: 10px;
+}
+
+#couponTypeSearchInput {
+  border-radius: 8px;
+  background-color: #f7f4ed;
+  box-sizing: border-box;
+}
+
+#couponTypeSearchInput.custom-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Popup értesítő alapstílusok: helyezzük el az ablakot a jobb alsó sarokban, háttér, padding stb. */
+.popup-notification {
+  position: fixed;
+  top: 150px;             /* A képernyő tetejétől 20px-re */
+  left: 50%;             /* A bal oldaltól 50% */
+  transform: translateX(-50%) translateY(20px); /* Vízszintesen középre, vertikálisan animációhoz kezdetben 20px lejjebb */
+  background: #fefefe;
+  color: #333;
+  padding: 15px 20px;
+  border: 2px solid #888;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1100;
+  pointer-events: none;  /* Nem akadályozza a kattintásokat */
+  opacity: 0;
+  /* Az animációk később felülírják majd a kezdeti beállításokat */
+}
+
+
+/* Animáció beúszáshoz */
+@keyframes popupShow {
+  from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes popupHide {
+  from {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+  }
+  to {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+  }
+}
+
+/* Confirm modal stílusok */
+#confirmModal {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none; /* Alapból rejtett */
+  align-items: center;
+  justify-content: center;
+}
+
+#confirmModal .modal-content {
+  background: #ccffcc;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.4s ease;
+}
+
+.confirm-buttons {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.confirm-buttons button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.confirm-buttons .btn-danger {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.confirm-buttons .btn-danger:hover {
+  background-color: #e60000;
+}
+
+.confirm-buttons .btn-secondary {
+  background-color: #ff922b;
+  color: white;
+}
+
+.confirm-buttons .btn-secondary:hover {
+  background-color: #e66a1c;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

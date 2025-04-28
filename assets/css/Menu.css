@@ -1,0 +1,98 @@
+.card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background-color: #ccffcc;
+    padding: 20px;
+}
+
+.card-body {
+    background-color: #ccffcc;
+}
+
+.card:hover {
+    transform: scale(1.05); 
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.original {
+    color: gray;
+}
+
+.cart-img {
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.summary {
+    margin: 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
+/* Új stílus a <details> belső <ul> elemének animálásához */
+#menu-list details ul {
+    overflow: hidden;
+    max-height: 0;              /* Alapesetben zárt állapot */
+    transition: max-height 0.5s ease-in-out;
+}
+
+/* Alapértelmezett állapot: el van rejtve, és egy kis eltolódás van */
+.fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 2s ease-out, transform 0.5s ease-out;
+}
+
+/* Látható állapot: az elem visszatér eredeti helyzetébe, és látszik */
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Popup értesítő alapstílusok: helyezzük el az ablakot a jobb alsó sarokban, háttér, padding stb. */
+.popup-notification {
+    position: fixed;
+    top: 150px;             /* A képernyő tetejétől 20px-re */
+    left: 50%;             /* A bal oldaltól 50% */
+    transform: translateX(-50%) translateY(20px); /* Vízszintesen középre, vertikálisan animációhoz kezdetben 20px lejjebb */
+    background: #fefefe;
+    color: #333;
+    padding: 15px 20px;
+    border: 2px solid #888;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1100;
+    pointer-events: none;  /* Nem akadályozza a kattintásokat */
+    opacity: 0;
+    /* Az animációk később felülírják majd a kezdeti beállításokat */
+}
+
+
+/* Animáció beúszáshoz */
+@keyframes popupShow {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes popupHide {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+}
